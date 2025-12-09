@@ -103,6 +103,54 @@
             position: relative;
         }
 
+        /* RTL tweaks for top bar navigation */
+        .admin-topbar nav {
+            display: flex;
+        }
+
+        [dir="rtl"] .admin-topbar {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .admin-topbar nav {
+            flex-direction: row-reverse;
+        }
+
+        [dir="rtl"] .admin-topbar .admin-actions {
+            flex-direction: row-reverse;
+            margin-right: 0;
+            margin-left: auto;
+        }
+
+        [dir="rtl"] .admin-topbar #sidebar-toggle {
+            transform: scaleX(-1);
+        }
+
+        /* Structured admin nav */
+        .admin-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-nav li {
+            display: flex;
+        }
+
+        [dir="rtl"] .admin-nav {
+            flex-direction: row-reverse;
+        }
+
+        /* Topbar spacing on narrow screens */
+        .admin-topbar {
+            gap: 0.75rem;
+        }
+
+        .admin-actions {
+            margin-left: auto;
+        }
+
         .card-premium:hover {
             transform: translateY(-8px) scale(1.03);
             box-shadow: 0 25px 50px -12px rgba(0, 102, 255, 0.4);
@@ -248,30 +296,39 @@
     <div class="flex-1 flex flex-col min-h-screen lg:h-full overflow-hidden relative">
         <!-- Top Header with Navbar -->
         <header
-            class="h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex items-center justify-between px-6 z-40 shadow-lg">
+            class="admin-topbar h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex items-center justify-between px-6 z-40 shadow-lg">
             <button id="sidebar-toggle"
                 class="text-slate-400 hover:text-white lg:hidden hover:scale-110 transition-all duration-200">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
 
             <!-- Navigation Links -->
-            <nav class="hidden md:flex items-center gap-6">
-                <a href="index.html"
-                    class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
-                    <i class="fa-solid fa-home text-sm"></i> Home V1
-                </a>
-                <a href="index2.html"
-                    class="text-slate-400 hover:text-secondary transition-colors font-medium flex items-center gap-2">
-                    <i class="fa-solid fa-home text-sm"></i> Home V2
-                </a>
-                <a href="about.html" class="text-slate-400 hover:text-primary transition-colors font-medium">About</a>
-                <a href="services.html"
-                    class="text-slate-400 hover:text-primary transition-colors font-medium">Services</a>
-                <a href="contact.html"
-                    class="text-slate-400 hover:text-primary transition-colors font-medium">Contact</a>
+            <nav class="hidden md:block">
+                <ul class="admin-nav">
+                    <li><a href="index.html"
+                            class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
+                            <i class="fa-solid fa-home text-sm"></i> Home V1
+                        </a></li>
+                    <li><a href="index2.html"
+                            class="text-slate-400 hover:text-secondary transition-colors font-medium flex items-center gap-2">
+                            <i class="fa-solid fa-home text-sm"></i> Home V2
+                        </a></li>
+                    <li><a href="about.html"
+                            class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-sm"></i> About
+                        </a></li>
+                    <li><a href="services.html"
+                            class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
+                            <i class="fa-solid fa-briefcase text-sm"></i> Services
+                        </a></li>
+                    <li><a href="contact.html"
+                            class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-sm"></i> Contact
+                        </a></li>
+                </ul>
             </nav>
 
-            <div class="flex items-center gap-4">
+            <div class="admin-actions flex items-center gap-4">
                 <!-- RTL/LTR Globe Button -->
                 <button id="rtl-toggle"
                     class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-gradient-to-br hover:from-primary hover:to-accent text-slate-300 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
@@ -524,18 +581,35 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Sidebar Toggle
+        // Sidebar Toggle with RTL awareness
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
         const toggleBtn = document.getElementById('sidebar-toggle');
 
+        function setSidebarDirection() {
+            const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            sidebar.classList.remove('-translate-x-full', 'translate-x-full');
+            sidebar.classList.add(isRTL ? 'translate-x-full' : '-translate-x-full');
+        }
+
         function toggleSidebar() {
-            sidebar.classList.toggle('-translate-x-full');
+            const hiddenClass = document.documentElement.getAttribute('dir') === 'rtl' ? 'translate-x-full' : '-translate-x-full';
+            sidebar.classList.toggle(hiddenClass);
             overlay.classList.toggle('hidden');
         }
 
+        setSidebarDirection();
         toggleBtn.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
+
+        // When RTL toggles, re-align sidebar and close overlay
+        const rtlBtns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-mobile');
+        rtlBtns.forEach(btn => btn.addEventListener('click', () => {
+            setTimeout(() => {
+                setSidebarDirection();
+                overlay.classList.add('hidden');
+            }, 50);
+        }));
 
 
         // Chart.js with Premium Colors

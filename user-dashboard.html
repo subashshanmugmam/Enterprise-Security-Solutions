@@ -402,20 +402,37 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Sidebar Toggle
+        // Sidebar Toggle with RTL awareness
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
         const toggleBtn = document.getElementById('sidebar-toggle');
 
-        if (toggleBtn) {
-            function toggleSidebar() {
-                sidebar.classList.toggle('-translate-x-full');
-                overlay.classList.toggle('hidden');
-            }
-            toggleBtn.addEventListener('click', toggleSidebar);
-            overlay.addEventListener('click', toggleSidebar);
+        function setSidebarDirection() {
+            const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+            sidebar.classList.remove('-translate-x-full', 'translate-x-full');
+            sidebar.classList.add(isRTL ? 'translate-x-full' : '-translate-x-full');
         }
 
+        function toggleSidebar() {
+            const hiddenClass = document.documentElement.getAttribute('dir') === 'rtl' ? 'translate-x-full' : '-translate-x-full';
+            sidebar.classList.toggle(hiddenClass);
+            overlay.classList.toggle('hidden');
+        }
+
+        if (toggleBtn) {
+            setSidebarDirection();
+            toggleBtn.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+
+            // When RTL toggles, re-align sidebar and close overlay
+            const rtlBtns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-mobile');
+            rtlBtns.forEach(btn => btn.addEventListener('click', () => {
+                setTimeout(() => {
+                    setSidebarDirection();
+                    overlay.classList.add('hidden');
+                }, 50);
+            }));
+        }
 
     </script>
 </body>
