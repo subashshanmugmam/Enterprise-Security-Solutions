@@ -157,7 +157,7 @@
     </style>
 </head>
 
-<body class="bg-dark text-slate-300 font-sans flex h-screen overflow-hidden">
+<body class="bg-dark text-slate-300 font-sans flex min-h-screen lg:h-screen overflow-x-hidden">
 
     <!-- Sidebar -->
     <aside
@@ -245,7 +245,7 @@
     </aside>
 
     <!-- Main Content -->
-    <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <div class="flex-1 flex flex-col min-h-screen lg:h-full overflow-hidden relative">
         <!-- Top Header with Navbar -->
         <header
             class="h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex items-center justify-between px-6 z-40 shadow-lg">
@@ -287,10 +287,10 @@
         </header>
 
         <!-- Main Scrollable Area -->
-        <main class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-dark via-slate-900 to-slate-950">
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 bg-gradient-to-br from-dark via-slate-900 to-slate-950">
 
             <!-- KPI Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
                 <!-- Card 1 -->
                 <div
                     class="card-premium bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 animate-fade-up">
@@ -369,7 +369,7 @@
             </div>
 
             <!-- Charts & Status -->
-            <div class="grid lg:grid-cols-3 gap-6 mb-8">
+            <div class="grid lg:grid-cols-3 gap-4 md:gap-6 mb-8">
                 <!-- Main Chart -->
                 <div
                     class="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 shadow-xl">
@@ -464,7 +464,7 @@
                         →</a>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-400">
+                    <table class="w-full min-w-[720px] text-left text-sm text-slate-400">
                         <thead class="bg-slate-950 text-xs uppercase font-bold text-slate-300">
                             <tr>
                                 <th class="px-6 py-4">Severity</th>
