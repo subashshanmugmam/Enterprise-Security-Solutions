@@ -218,73 +218,7 @@
         </div>
     </header>
 
-    <!-- Security Assessment Widget -->
-    <section id="assessment" class="py-16 bg-slate-800 border-b border-slate-700">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div
-                class="glass-card rounded-2xl p-6 md:p-10 relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700">
-                <div class="relative z-10 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                    <div>
-                        <h3 class="text-3xl font-bold text-white mb-4">How Secure Is Your Business?</h3>
-                        <p class="text-slate-400 mb-8">Take our 1-minute initial assessment to identify potential
-                            vulnerabilities in your current IT infrastructure.</p>
 
-                        <!-- Simple Interactive Form -->
-                        <form id="assessment-form" class="space-y-6">
-                            <div>
-                                <label class="block text-sm font-medium text-slate-300 mb-2">1. Do you have
-                                    Multi-Factor
-                                    Authentication (MFA) enabled?</label>
-                                <div class="flex gap-4">
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q1"
-                                            value="10" class="accent-secondary"> Yes, everywhere</label>
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q1"
-                                            value="5" class="accent-secondary"> Some systems</label>
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q1"
-                                            value="0" class="accent-secondary"> No / Unsure</label>
-                                </div>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-slate-300 mb-2">2. How often do you
-                                    backup
-                                    your data?</label>
-                                <div class="flex gap-4">
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q2"
-                                            value="10" class="accent-secondary"> Daily/Real-time</label>
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q2"
-                                            value="5" class="accent-secondary"> Weekly</label>
-                                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q2"
-                                            value="0" class="accent-secondary"> Rarely/Never</label>
-                                </div>
-                            </div>
-                            <button type="button" onclick="calculateScore()"
-                                class="mt-4 px-6 py-3 bg-primary text-white rounded-lg hover:bg-sky-500 transition-colors w-full md:w-auto">Get
-                                My Score</button>
-                        </form>
-                    </div>
-
-                    <!-- Result Panel (Hidden initially) -->
-                    <div id="assessment-result" class="hidden text-center">
-                        <div class="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center">
-                            <svg class="w-full h-full transform -rotate-90">
-                                <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="10"
-                                    fill="transparent" class="text-slate-700" />
-                                <circle id="score-circle" cx="80" cy="80" r="70" stroke="currentColor" stroke-width="10"
-                                    fill="transparent" class="text-secondary" stroke-dasharray="440"
-                                    stroke-dashoffset="440" />
-                            </svg>
-                            <span id="score-text" class="absolute text-4xl font-bold text-white">0%</span>
-                        </div>
-                        <h4 class="text-2xl font-bold text-white mb-2">Security Score</h4>
-                        <p class="text-slate-400 mb-6">Based on your quick inputs.</p>
-                        <a href="contact.html"
-                            class="inline-block px-8 py-3 bg-secondary text-white rounded-lg font-bold hover:shadow-lg transition-all">Get
-                            Full Free Audit</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Services Tabs -->
     <section class="py-16 lg:py-24 bg-dark">
@@ -1026,43 +960,7 @@
     <script src="assets/js/main.js"></script>
     <!-- Inline script for page specific logic -->
     <script>
-        // Assessment Calc
-        function calculateScore() {
-            const form = document.getElementById('assessment-form');
-            const resultPanel = document.getElementById('assessment-result');
-            const scoreText = document.getElementById('score-text');
-            const scoreCircle = document.getElementById('score-circle');
 
-            const q1 = document.querySelector('input[name="q1"]:checked');
-            const q2 = document.querySelector('input[name="q2"]:checked');
-
-            if (!q1 || !q2) {
-                alert('Please answer both questions');
-                return;
-            }
-
-            let score = 0;
-            score += parseInt(q1.value);
-            score += parseInt(q2.value);
-
-            // Normalize to 100 for demo (max 20 points here)
-            const percentage = (score / 20) * 100;
-
-            form.parentElement.classList.add('hidden');
-            resultPanel.classList.remove('hidden');
-
-            // Animation
-            let current = 0;
-            const timer = setInterval(() => {
-                current += 1;
-                scoreText.textContent = current + '%';
-                // Dash offset calc for circle (440 is circumference)
-                const offset = 440 - (440 * current) / 100;
-                scoreCircle.style.strokeDashoffset = offset;
-
-                if (current >= percentage) clearInterval(timer);
-            }, 20);
-        }
 
         // Tab Logic
         function openTab(evt, tabName) {
