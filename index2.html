@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureTech - Advanced Cybersecurity Shield</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0f172a',
+                        primary: '#0ea5e9',
+                        secondary: '#10b981',
+                        accent: '#8b5cf6',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-dark text-slate-300 font-sans selection:bg-secondary selection:text-white">
+
+    <!-- Navigation (Same as Index V1) -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div
+                    class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-secondary to-primary rounded-lg shadow-lg group-hover:shadow-[0_0_15px_rgba(16,185,129,0.5)] transition-all">
+                    <i class="fa-solid fa-lock text-white text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-white tracking-tight">Secure<span
+                        class="text-secondary">Shield</span></span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8">
+                <div class="group relative">
+                    <button
+                        class="flex items-center gap-1 text-white font-medium hover:text-secondary transition-colors py-2">
+                        Home <i
+                            class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <div
+                        class="dropdown-menu absolute top-full left-0 w-48 bg-white text-slate-800 rounded-lg shadow-xl overflow-hidden mt-2 border border-slate-100">
+                        <a href="index.html"
+                            class="block px-4 py-3 hover:bg-slate-50 border-b border-slate-100 transition-colors font-medium">
+                            <i class="fa-solid fa-house-signal mr-2"></i> Home Ver 1
+                        </a>
+                        <a href="index2.html"
+                            class="block px-4 py-3 hover:bg-slate-50 transition-colors font-medium text-secondary">
+                            <i class="fa-solid fa-shield-cat mr-2"></i> Home Ver 2
+                        </a>
+                    </div>
+                </div>
+                <a href="about.html" class="text-slate-300 hover:text-white font-medium transition-colors">About</a>
+                <a href="services.html" class="text-slate-300 hover:text-white font-medium transition-colors">Services</a>
+                <a href="contact.html" class="text-slate-300 hover:text-white font-medium transition-colors">Contact</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="login.html" class="btn-secondary">Client Portal</a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative overflow-hidden bg-gradient-to-b from-slate-900/90 via-slate-900 to-dark pt-28 pb-20 lg:pt-40 lg:pb-28">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute -right-24 -top-24 w-96 h-96 bg-secondary/20 blur-3xl rounded-full animate-float"></div>
+            <div class="absolute left-10 top-32 w-64 h-64 bg-primary/15 blur-3xl rounded-full animate-pulse-glow"></div>
+        </div>
+
+        <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2 space-y-6 text-center lg:text-left">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white leading-tight">
+                    Advanced Cybersecurity for Modern Enterprises
+                </h1>
+                <p class="text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0">
+                    Comprehensive IT security for modern businesses. We anticipate attacks before they happen.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#assessment"
+                        class="px-8 py-4 rounded-lg bg-secondary text-white font-bold hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all text-center">
+                        Check Your Security Score
+                    </a>
+                    <a href="contact.html"
+                        class="px-8 py-4 rounded-lg border border-slate-600 text-white font-medium hover:bg-slate-800 transition-all text-center">
+                        Talk to an Expert
+                    </a>
+                </div>
+                <div class="flex items-center gap-4 text-slate-400 text-sm justify-center lg:justify-start">
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 bg-secondary rounded-full"></span>24/7
+                        Monitoring</div>
+                    <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span>Zero-Trust
+                        Architecture</div>
+                </div>
+            </div>
+
+            <div class="relative w-full lg:w-1/2 flex justify-center">
+                <div class="relative w-[420px] h-[420px] max-w-full animate-float">
+                    <div class="absolute inset-0 bg-secondary/20 rounded-full blur-[90px]"></div>
+                    <div class="relative z-10 w-full h-full flex items-center justify-center">
+                        <i
+                            class="fa-solid fa-shield-virus text-[240px] text-gradient-premium opacity-90 drop-shadow-[0_0_50px_rgba(14,165,233,0.45)]"></i>
+                    </div>
+                    <div
+                        class="absolute top-6 right-8 w-16 h-16 bg-dark border border-slate-700 rounded-xl flex items-center justify-center shadow-lg animate-[bounce_4s_infinite]">
+                        <i class="fa-solid fa-lock text-2xl text-primary"></i>
+                    </div>
+                    <div
+                        class="absolute bottom-16 left-6 w-14 h-14 bg-dark border border-slate-700 rounded-xl flex items-center justify-center shadow-lg animate-[bounce_5s_infinite_1s]">
+                        <i class="fa-solid fa-code text-xl text-accent"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <!-- Security Assessment Widget -->
+        <section id="assessment" class="py-16 bg-slate-800 border-b border-slate-700">
+            <div class="container mx-auto px-6">
+                <div
+                    class="glass-card rounded-2xl p-8 md:p-12 relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700">
+                    <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-3xl font-bold text-white mb-4">How Secure Is Your Business?</h3>
+                            <p class="text-slate-400 mb-8">Take our 1-minute initial assessment to identify potential
+                                vulnerabilities in your current IT infrastructure.</p>
+
+                            <!-- Simple Interactive Form -->
+                            <form id="assessment-form" class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">1. Do you have
+                                        Multi-Factor
+                                        Authentication (MFA) enabled?</label>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                                name="q1" value="10" class="accent-secondary"> Yes, everywhere</label>
+                                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                                name="q1" value="5" class="accent-secondary"> Some systems</label>
+                                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                                name="q1" value="0" class="accent-secondary"> No / Unsure</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-300 mb-2">2. How often do you
+                                        backup
+                                        your data?</label>
+                                    <div class="flex gap-4">
+                                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                                name="q2" value="10" class="accent-secondary"> Daily/Real-time</label>
+                                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                                name="q2" value="5" class="accent-secondary"> Weekly</label>
+                                        <label class="flex items-center gap-2 cursor-pointer"><input type="radio"
+                                                name="q2" value="0" class="accent-secondary"> Rarely/Never</label>
+                                    </div>
+                                </div>
+                                <button type="button" onclick="calculateScore()"
+                                    class="mt-4 px-6 py-3 bg-primary text-white rounded-lg hover:bg-sky-500 transition-colors w-full md:w-auto">Get
+                                    My Score</button>
+                            </form>
+                        </div>
+
+                        <!-- Result Panel (Hidden initially) -->
+                        <div id="assessment-result" class="hidden text-center">
+                            <div class="relative w-40 h-40 mx-auto mb-6 flex items-center justify-center">
+                                <svg class="w-full h-full transform -rotate-90">
+                                    <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="10"
+                                        fill="transparent" class="text-slate-700" />
+                                    <circle id="score-circle" cx="80" cy="80" r="70" stroke="currentColor"
+                                        stroke-width="10" fill="transparent" class="text-secondary"
+                                        stroke-dasharray="440" stroke-dashoffset="440" />
+                                </svg>
+                                <span id="score-text" class="absolute text-4xl font-bold text-white">0%</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-white mb-2">Security Score</h4>
+                            <p class="text-slate-400 mb-6">Based on your quick inputs.</p>
+                            <a href="contact.html"
+                                class="inline-block px-8 py-3 bg-secondary text-white rounded-lg font-bold hover:shadow-lg transition-all">Get
+                                Full Free Audit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Tabs -->
+        <section class="py-24 bg-dark">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Our Expertise</h2>
+                    <p class="text-slate-400">Holistic protection tailored to your industry needs.</p>
+                </div>
+
+                <div class="grid lg:grid-cols-4 gap-8">
+                    <!-- Tab Menu -->
+                    <div class="lg:col-span-1 space-y-2">
+                        <button
+                            class="tab-btn w-full text-left px-6 py-4 rounded-lg bg-slate-800 text-white font-medium hover:bg-slate-700 focus:bg-primary focus:text-white transition-all active-tab"
+                            onclick="openTab(event, 'cyber')">
+                            <i class="fa-solid fa-shield-halved mr-3"></i> Cybersecurity
+                        </button>
+                        <button
+                            class="tab-btn w-full text-left px-6 py-4 rounded-lg bg-dark border border-slate-800 text-slate-400 hover:bg-slate-800 transition-all"
+                            onclick="openTab(event, 'managed')">
+                            <i class="fa-solid fa-server mr-3"></i> Managed IT
+                        </button>
+                        <button
+                            class="tab-btn w-full text-left px-6 py-4 rounded-lg bg-dark border border-slate-800 text-slate-400 hover:bg-slate-800 transition-all"
+                            onclick="openTab(event, 'cloud')">
+                            <i class="fa-solid fa-cloud mr-3"></i> Cloud Services
+                        </button>
+                        <button
+                            class="tab-btn w-full text-left px-6 py-4 rounded-lg bg-dark border border-slate-800 text-slate-400 hover:bg-slate-800 transition-all"
+                            onclick="openTab(event, 'compliance')">
+                            <i class="fa-solid fa-file-contract mr-3"></i> Compliance
+                        </button>
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="lg:col-span-3">
+                        <!-- Cybersecurity Tab -->
+                        <div id="cyber" class="tab-content animate-fade-in block">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <h3 class="text-3xl font-bold text-white mb-4">Advanced Threat Protection</h3>
+                                    <p class="text-slate-400 mb-6 leading-relaxed">
+                                        Our cybersecurity suite goes beyond basic antiviruses. We deploy EDR, SIEM, and
+                                        AI-driven behavior analysis to stop zero-day attacks.
+                                    </p>
+                                    <ul class="space-y-3 mb-8">
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-secondary mr-3"></i> Real-time Incident
+                                            Response</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-secondary mr-3"></i> Penetration Testing
+                                        </li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-secondary mr-3"></i> Dark Web Monitoring
+                                        </li>
+                                    </ul>
+                                    <a href="services.html"
+                                        class="text-primary hover:text-white font-medium underline-offset-4 hover:underline">Read
+                                        detailed specs <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800"
+                                    class="rounded-xl shadow-2xl border border-slate-700">
+                            </div>
+                        </div>
+
+                        <!-- Managed IT Tab -->
+                        <div id="managed" class="tab-content animate-fade-in hidden">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <h3 class="text-3xl font-bold text-white mb-4">Infrastructure Management</h3>
+                                    <p class="text-slate-400 mb-6 font-light">
+                                        Focus on your business while we handle the tech. From helpdesk support to server
+                                        maintenance.
+                                    </p>
+                                    <ul class="space-y-3 mb-8">
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-primary mr-3"></i> 24/7 Helpdesk</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-primary mr-3"></i> Asset Management</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-primary mr-3"></i> Patch Management</li>
+                                    </ul>
+                                    <a href="services.html"
+                                        class="text-primary hover:text-white font-medium underline-offset-4 hover:underline">Read
+                                        detailed specs <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800"
+                                    class="rounded-xl shadow-2xl border border-slate-700">
+                            </div>
+                        </div>
+
+                        <!-- Cloud Tab -->
+                        <div id="cloud" class="tab-content animate-fade-in hidden">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <h3 class="text-3xl font-bold text-white mb-4">Cloud Strategy & Migration</h3>
+                                    <p class="text-slate-400 mb-6 font-light">
+                                        Seamlessly migrate to the cloud with minimal downtime. We support AWS, Azure,
+                                        and
+                                        Google Cloud.
+                                    </p>
+                                    <ul class="space-y-3 mb-8">
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-accent mr-3"></i> Cloud Architecture</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-accent mr-3"></i> Cost Optimization</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-accent mr-3"></i> Hybrid Deployments</li>
+                                    </ul>
+                                    <a href="services.html"
+                                        class="text-primary hover:text-white font-medium underline-offset-4 hover:underline">Read
+                                        detailed specs <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800"
+                                    class="rounded-xl shadow-2xl border border-slate-700">
+                            </div>
+                        </div>
+                        <!-- Compliance Tab -->
+                        <div id="compliance" class="tab-content animate-fade-in hidden">
+                            <div class="grid md:grid-cols-2 gap-8 items-center">
+                                <div>
+                                    <h3 class="text-3xl font-bold text-white mb-4">Regulatory Compliance</h3>
+                                    <p class="text-slate-400 mb-6 font-light">
+                                        Navigate complex regulations with ease. We ensure you meet industry standards.
+                                    </p>
+                                    <ul class="space-y-3 mb-8">
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-secondary mr-3"></i> HIPAA & GDPR</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-secondary mr-3"></i> SOC 2 Reporting</li>
+                                        <li class="flex items-center text-slate-300"><i
+                                                class="fa-solid fa-check text-secondary mr-3"></i> Regular Audits</li>
+                                    </ul>
+                                    <a href="services.html"
+                                        class="text-primary hover:text-white font-medium underline-offset-4 hover:underline">Read
+                                        detailed specs <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                                </div>
+                                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800"
+                                    class="rounded-xl shadow-2xl border border-slate-700">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology -->
+        <section class="py-24 bg-slate-900 border-y border-slate-800">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-white mb-16">Our Proven Framework</h2>
+                <div class="grid md:grid-cols-4 gap-8 relative">
+                    <!-- Connecting Line (hidden on mobile) -->
+                    <div
+                        class="hidden md:block absolute top-8 left-0 w-full h-1 bg-gradient-to-r from-secondary/20 via-primary/20 to-secondary/20 -z-0">
+                    </div>
+
+                    <div class="text-center relative z-10 group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-slate-800 rounded-full border-4 border-slate-900 flex items-center justify-center text-secondary text-2xl shadow-lg group-hover:bg-secondary group-hover:text-white transition-all duration-300">
+                            1</div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Assess</h3>
+                        <p class="mt-2 text-slate-400 text-sm">Vulnerability scanning and audit.</p>
+                    </div>
+                    <div class="text-center relative z-10 group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-slate-800 rounded-full border-4 border-slate-900 flex items-center justify-center text-primary text-2xl shadow-lg group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                            2</div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Plan</h3>
+                        <p class="mt-2 text-slate-400 text-sm">Strategic roadmap development.</p>
+                    </div>
+                    <div class="text-center relative z-10 group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-slate-800 rounded-full border-4 border-slate-900 flex items-center justify-center text-accent text-2xl shadow-lg group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                            3</div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Deploy</h3>
+                        <p class="mt-2 text-slate-400 text-sm">Implementation of security controls.</p>
+                    </div>
+                    <div class="text-center relative z-10 group">
+                        <div
+                            class="w-16 h-16 mx-auto bg-slate-800 rounded-full border-4 border-slate-900 flex items-center justify-center text-secondary text-2xl shadow-lg group-hover:bg-secondary group-hover:text-white transition-all duration-300">
+                            4</div>
+                        <h3 class="mt-6 text-xl font-bold text-white">Monitor</h3>
+                        <p class="mt-2 text-slate-400 text-sm">24/7 surveillance and maintenance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer (Same as V1) -->
+        <footer class="bg-dark pt-16 pb-8">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-4 gap-12 mb-12 border-t border-slate-800 pt-12">
+                    <div>
+                        <div class="flex items-center gap-2 mb-6">
+                            <i class="fa-solid fa-shield-halved text-secondary text-2xl"></i>
+                            <span class="text-2xl font-bold text-white">SecureTech</span>
+                        </div>
+                    </div>
+                    <!-- Simplified Footer Mockup -->
+                    <div class="text-slate-500">
+                        <h4 class="text-white font-bold mb-4">Nav</h4>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="hover:text-white">Home V1</a></li>
+                            <li><a href="services.html" class="hover:text-white">Services</a></li>
+                            <li><a href="about.html" class="hover:text-white">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-slate-500">
+                        <h4 class="text-white font-bold mb-4">Support</h4>
+                        <ul class="space-y-2">
+                            <li><a href="contact.html" class="hover:text-white">Contact Us</a></li>
+                            <li><a href="#" class="hover:text-white">Help Center</a></li>
+                            <li><a href="login.html" class="hover:text-white">Client Portal</a></li>
+                        </ul>
+                    </div>
+                    <div class="text-slate-500">
+                        <h4 class="text-white font-bold mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white">Privacy</a></li>
+                            <li><a href="#" class="hover:text-white">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center text-slate-600 text-sm">
+                    &copy; 2024 SecureTech. All protected.
+                </div>
+            </div>
+        </footer>
+
+        <script src="assets/js/main.js"></script>
+        <!-- Inline script for page specific logic -->
+        <script>
+            // Assessment Calc
+            function calculateScore() {
+                const form = document.getElementById('assessment-form');
+                const resultPanel = document.getElementById('assessment-result');
+                const scoreText = document.getElementById('score-text');
+                const scoreCircle = document.getElementById('score-circle');
+
+                const q1 = document.querySelector('input[name="q1"]:checked');
+                const q2 = document.querySelector('input[name="q2"]:checked');
+
+                if (!q1 || !q2) {
+                    alert('Please answer both questions');
+                    return;
+                }
+
+                let score = 0;
+                score += parseInt(q1.value);
+                score += parseInt(q2.value);
+
+                // Normalize to 100 for demo (max 20 points here)
+                const percentage = (score / 20) * 100;
+
+                form.parentElement.classList.add('hidden');
+                resultPanel.classList.remove('hidden');
+
+                // Animation
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += 1;
+                    scoreText.textContent = current + '%';
+                    // Dash offset calc for circle (440 is circumference)
+                    const offset = 440 - (440 * current) / 100;
+                    scoreCircle.style.strokeDashoffset = offset;
+
+                    if (current >= percentage) clearInterval(timer);
+                }, 20);
+            }
+
+            // Tab Logic
+            function openTab(evt, tabName) {
+                var i, tabContent, tabBtns;
+
+                // Hide all tab content
+                tabContent = document.getElementsByClassName("tab-content");
+                for (i = 0; i < tabContent.length; i++) {
+                    tabContent[i].classList.add("hidden");
+                }
+
+                // Remove active class from all buttons
+                tabBtns = document.getElementsByClassName("tab-btn");
+                for (i = 0; i < tabBtns.length; i++) {
+                    tabBtns[i].classList.remove("bg-slate-800", "text-white");
+                    tabBtns[i].classList.add("text-slate-400", "bg-dark");
+                }
+
+                // Show current tab and add active class to button
+                document.getElementById(tabName).classList.remove("hidden");
+                const btn = evt.currentTarget;
+                btn.classList.add("bg-slate-800", "text-white");
+                btn.classList.remove("text-slate-400", "bg-dark");
+            }
+
+            // Add mobile RTL button event listener
+            const rtlBtnMobile = document.getElementById('rtl-toggle-mobile');
+            if (rtlBtnMobile) {
+                const currentDir = localStorage.getItem('dir') || 'ltr';
+                updateRTLButtonText(rtlBtnMobile, currentDir);
+
+                rtlBtnMobile.addEventListener('click', () => {
+                    const html = document.documentElement;
+                    const newDir = html.getAttribute('dir') === 'ltr' ? 'rtl' : 'ltr';
+                    html.setAttribute('dir', newDir);
+                    localStorage.setItem('dir', newDir);
+                    updateRTLButtonText(rtlBtnMobile, newDir);
+
+                    // Update desktop button as well if it exists
+                    const rtlBtnDesktop = document.getElementById('rtl-toggle');
+                    if (rtlBtnDesktop) updateRTLButtonText(rtlBtnDesktop, newDir);
+                });
+            }
+        </script>
+</body>
+
+</html>
