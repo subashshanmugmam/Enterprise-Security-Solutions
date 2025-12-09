@@ -103,24 +103,8 @@
             position: relative;
         }
 
-        /* RTL tweaks for top bar navigation */
-        .admin-topbar nav {
-            display: flex;
-        }
-
-        [dir="rtl"] .admin-topbar {
-            flex-direction: row-reverse;
-        }
-
-        [dir="rtl"] .admin-topbar nav {
-            flex-direction: row-reverse;
-        }
-
-        [dir="rtl"] .admin-topbar .admin-actions {
-            flex-direction: row-reverse;
-            margin-right: 0;
-            margin-left: auto;
-        }
+        /* RTL tweaks: We rely mostly on Tailwind logical properties now (ms-auto, etc.) */
+        /* If specific overrides are needed, they can go here, but removing the conflicting ones */
 
         [dir="rtl"] .admin-topbar #sidebar-toggle {
             transform: scaleX(-1);
@@ -138,17 +122,9 @@
             display: flex;
         }
 
-        [dir="rtl"] .admin-nav {
-            flex-direction: row-reverse;
-        }
-
         /* Topbar spacing on narrow screens */
         .admin-topbar {
             gap: 0.75rem;
-        }
-
-        .admin-actions {
-            margin-left: auto;
         }
 
         .card-premium:hover {
@@ -164,6 +140,7 @@
             padding: 1px;
             background: linear-gradient(135deg, rgba(0, 102, 255, 0.3), rgba(0, 212, 170, 0.3));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             opacity: 0;
@@ -209,7 +186,7 @@
 
     <!-- Sidebar -->
     <aside
-        class="w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-r border-slate-800 flex flex-col transition-all duration-300 transform -translate-x-full lg:translate-x-0 fixed lg:static z-50 h-full shadow-2xl"
+        class="w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-e border-slate-800 flex flex-col transition-all duration-300 transform ltr:-translate-x-full rtl:translate-x-full lg:!transform-none fixed lg:static z-50 h-full shadow-2xl"
         id="sidebar">
         <!-- Logo -->
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
@@ -247,7 +224,7 @@
                     class="fa-solid fa-ticket w-5 text-center group-hover:text-orange-400 group-hover:rotate-12 transition-all"></i>
                 Support Tickets
                 <span
-                    class="ml-auto bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full px-2 py-0.5 font-bold shadow-lg animate-bounce">3</span>
+                    class="ms-auto bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full px-2 py-0.5 font-bold shadow-lg animate-bounce">3</span>
             </a>
             <a href="#"
                 class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
@@ -267,11 +244,11 @@
             <div class="flex gap-2">
                 <a href="user-dashboard.html"
                     class="flex-1 text-center px-3 py-2 text-xs rounded-lg bg-slate-800 text-slate-400 hover:bg-gradient-to-r hover:from-secondary hover:to-secondary-dark hover:text-white hover:border-secondary border border-slate-700 font-medium transition-all duration-300 hover:scale-105">
-                    <i class="fa-solid fa-user mr-1"></i> Client
+                    <i class="fa-solid fa-user me-1"></i> Client
                 </a>
                 <a href="admin-dashboard.html"
                     class="flex-1 text-center px-3 py-2 text-xs rounded-lg bg-gradient-to-r from-primary to-accent text-white border border-primary font-bold transition-all duration-300 shadow-[0_0_20px_rgba(0,102,255,0.4)] hover:shadow-[0_0_30px_rgba(0,102,255,0.6)] hover:scale-105">
-                    <i class="fa-solid fa-user-shield mr-1"></i> Admin
+                    <i class="fa-solid fa-user-shield me-1"></i> Admin
                 </a>
             </div>
         </div>
@@ -328,7 +305,7 @@
                 </ul>
             </nav>
 
-            <div class="admin-actions flex items-center gap-4">
+            <div class="admin-actions flex items-center gap-4 ms-auto">
                 <!-- RTL/LTR Globe Button -->
                 <button id="rtl-toggle"
                     class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-gradient-to-br hover:from-primary hover:to-accent text-slate-300 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
@@ -521,14 +498,14 @@
                         →</a>
                 </div>
                 <div class="overflow-x-auto">
-                    <table class="w-full min-w-[720px] text-left text-sm text-slate-400">
+                    <table class="w-full min-w-[720px] text-start text-sm text-slate-400">
                         <thead class="bg-slate-950 text-xs uppercase font-bold text-slate-300">
                             <tr>
                                 <th class="px-6 py-4">Severity</th>
                                 <th class="px-6 py-4">Event Type</th>
                                 <th class="px-6 py-4">Client</th>
                                 <th class="px-6 py-4">Time</th>
-                                <th class="px-6 py-4 text-right">Action</th>
+                                <th class="px-6 py-4 text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-700">
@@ -540,7 +517,7 @@
                                 <td class="px-6 py-4 text-white font-medium">Ransomware Sig. Blocked</td>
                                 <td class="px-6 py-4">FinanceCorp Ltd.</td>
                                 <td class="px-6 py-4">2 mins ago</td>
-                                <td class="px-6 py-4 text-right"><button
+                                <td class="px-6 py-4 text-end"><button
                                         class="text-white bg-slate-700 hover:bg-primary px-4 py-1.5 rounded-lg transition-all hover:scale-105 font-medium">View</button>
                                 </td>
                             </tr>
@@ -552,7 +529,7 @@
                                 <td class="px-6 py-4 text-white font-medium">Multiple Failed Logins</td>
                                 <td class="px-6 py-4">TechStart Inc.</td>
                                 <td class="px-6 py-4">15 mins ago</td>
-                                <td class="px-6 py-4 text-right"><button
+                                <td class="px-6 py-4 text-end"><button
                                         class="text-white bg-slate-700 hover:bg-primary px-4 py-1.5 rounded-lg transition-all hover:scale-105 font-medium">View</button>
                                 </td>
                             </tr>
@@ -564,7 +541,7 @@
                                 <td class="px-6 py-4 text-white font-medium">System Patch Completed</td>
                                 <td class="px-6 py-4">Global Logistics</td>
                                 <td class="px-6 py-4">1 hour ago</td>
-                                <td class="px-6 py-4 text-right"><button
+                                <td class="px-6 py-4 text-end"><button
                                         class="text-white bg-slate-700 hover:bg-primary px-4 py-1.5 rounded-lg transition-all hover:scale-105 font-medium">View</button>
                                 </td>
                             </tr>
@@ -587,28 +564,46 @@
         const toggleBtn = document.getElementById('sidebar-toggle');
 
         function setSidebarDirection() {
-            const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
-            sidebar.classList.remove('-translate-x-full', 'translate-x-full');
-            sidebar.classList.add(isRTL ? 'translate-x-full' : '-translate-x-full');
+            // Tailwind logical classes now handle most of this, but we need to toggle visibility classes manually for mobile
+            // The class 'lg:translate-x-0' handles desktop visibility.
+            // Mobile hidden state is what we toggle.
+            // In LTR: hidden = -translate-x-full
+            // In RTL: hidden = translate-x-full
+            // Logic below ensures we toggle the correct class based on dir
         }
 
         function toggleSidebar() {
-            const hiddenClass = document.documentElement.getAttribute('dir') === 'rtl' ? 'translate-x-full' : '-translate-x-full';
-            sidebar.classList.toggle(hiddenClass);
-            overlay.classList.toggle('hidden');
+            // Using !translate-x-0 to override LTR/RTL specific hidden classes
+            const isVisible = sidebar.classList.contains('!translate-x-0');
+
+            if (isVisible) {
+                sidebar.classList.remove('!translate-x-0');
+                overlay.classList.add('hidden');
+            } else {
+                sidebar.classList.add('!translate-x-0');
+                overlay.classList.remove('hidden');
+            }
         }
 
-        setSidebarDirection();
+        // Ensure we handle resize events to reset state
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                sidebar.classList.remove('!translate-x-0');
+                overlay.classList.add('hidden');
+            }
+        });
+
         toggleBtn.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
 
         // When RTL toggles, re-align sidebar and close overlay
         const rtlBtns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-mobile');
         rtlBtns.forEach(btn => btn.addEventListener('click', () => {
-            setTimeout(() => {
-                setSidebarDirection();
+            // Close sidebar on direction change for mobile to avoid confusion
+            if (window.innerWidth < 1024) {
+                sidebar.classList.remove('!translate-x-0');
                 overlay.classList.add('hidden');
-            }, 50);
+            }
         }));
 
 
