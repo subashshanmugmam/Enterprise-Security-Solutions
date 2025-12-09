@@ -1050,8 +1050,3 @@ Logout
 
 
 
-
-Welcome section:
-
-"Welcome back, [Client Name]"
-Company

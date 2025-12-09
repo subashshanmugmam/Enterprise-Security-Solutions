@@ -15,9 +15,13 @@
                 extend: {
                     colors: {
                         dark: '#0f172a',
-                        primary: '#0ea5e9',
-                        secondary: '#10b981',
-                        accent: '#8b5cf6',
+                        primary: '#0066FF',
+                        'primary-dark': '#0052CC',
+                        'primary-light': '#3D8BFF',
+                        secondary: '#00D4AA',
+                        'secondary-dark': '#00B894',
+                        accent: '#7C3AED',
+                        'accent-light': '#A78BFA',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -27,51 +31,185 @@
             }
         }
     </script>
+    <style>
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 25px rgba(0, 102, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(0, 102, 255, 0.7);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .card-premium {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .card-premium:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 25px 50px -12px rgba(0, 102, 255, 0.4);
+        }
+
+        .card-premium::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 102, 255, 0.3), rgba(0, 212, 170, 0.3));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .card-premium:hover::before {
+            opacity: 1;
+        }
+
+        .stat-number {
+            background: linear-gradient(135deg, #0066FF, #00D4AA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-glow:hover {
+            box-shadow: 0 0 30px rgba(0, 102, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        .btn-glow:active {
+            transform: scale(0.95);
+        }
+
+        .status-dot-pulse {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .icon-spin-hover:hover .fa {
+            animation: rotate 0.6s ease-in-out;
+        }
+    </style>
 </head>
 
 <body class="bg-dark text-slate-300 font-sans flex h-screen overflow-hidden">
 
     <!-- Sidebar -->
     <aside
-        class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-all duration-300 transform -translate-x-full lg:translate-x-0 fixed lg:static z-50 h-full"
+        class="w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-r border-slate-800 flex flex-col transition-all duration-300 transform -translate-x-full lg:translate-x-0 fixed lg:static z-50 h-full shadow-2xl"
         id="sidebar">
         <!-- Logo -->
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 group">
                 <div
-                    class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-primary to-accent rounded shadow-lg">
+                    class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-primary via-accent to-primary rounded shadow-xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
                     <i class="fa-solid fa-shield-halved text-white text-sm"></i>
                 </div>
                 <span class="text-xl font-bold text-white tracking-tight">Secure<span
-                        class="text-primary">Admin</span></span>
+                        class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Admin</span></span>
             </div>
         </div>
 
         <!-- Nav Links -->
         <nav class="flex-1 overflow-y-auto py-4 space-y-1 px-3">
-            <a href="#" class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg font-medium">
+            <a href="#"
+                class="flex items-center gap-3 px-3 py-2 bg-gradient-to-r from-primary/20 to-accent/20 text-primary rounded-lg font-medium border border-primary/30 shadow-[0_0_20px_rgba(0,102,255,0.2)]">
                 <i class="fa-solid fa-chart-pie w-5 text-center"></i> Dashboard
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-satellite-dish w-5 text-center"></i> Monitoring
+                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i
+                    class="fa-solid fa-satellite-dish w-5 text-center group-hover:text-secondary group-hover:scale-110 transition-all"></i>
+                Monitoring
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-users w-5 text-center"></i> Clients
+                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i
+                    class="fa-solid fa-users w-5 text-center group-hover:text-accent group-hover:scale-110 transition-all"></i>
+                Clients
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-ticket w-5 text-center"></i> Support Tickets
-                <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-0.5">3</span>
+                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group relative">
+                <i
+                    class="fa-solid fa-ticket w-5 text-center group-hover:text-orange-400 group-hover:rotate-12 transition-all"></i>
+                Support Tickets
+                <span
+                    class="ml-auto bg-gradient-to-r from-red-500 to-orange-500 text-white text-xs rounded-full px-2 py-0.5 font-bold shadow-lg animate-bounce">3</span>
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-triangle-exclamation w-5 text-center"></i> Alerts
+                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i
+                    class="fa-solid fa-triangle-exclamation w-5 text-center group-hover:text-yellow-400 transition-all"></i>
+                Alerts
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-file-contract w-5 text-center"></i> Reports
+                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i class="fa-solid fa-file-contract w-5 text-center group-hover:scale-110 transition-all"></i> Reports
             </a>
         </nav>
 
@@ -80,11 +218,11 @@
             <p class="text-xs text-slate-500 mb-2 font-medium">Switch Dashboard:</p>
             <div class="flex gap-2">
                 <a href="user-dashboard.html"
-                    class="flex-1 text-center px-3 py-2 text-xs rounded bg-slate-800 text-slate-400 hover:bg-secondary/20 hover:text-secondary hover:border-secondary border border-slate-700 font-medium transition-colors">
+                    class="flex-1 text-center px-3 py-2 text-xs rounded-lg bg-slate-800 text-slate-400 hover:bg-gradient-to-r hover:from-secondary hover:to-secondary-dark hover:text-white hover:border-secondary border border-slate-700 font-medium transition-all duration-300 hover:scale-105">
                     <i class="fa-solid fa-user mr-1"></i> Client
                 </a>
                 <a href="admin-dashboard.html"
-                    class="flex-1 text-center px-3 py-2 text-xs rounded bg-primary/20 text-primary border border-primary font-bold transition-colors">
+                    class="flex-1 text-center px-3 py-2 text-xs rounded-lg bg-gradient-to-r from-primary to-accent text-white border border-primary font-bold transition-all duration-300 shadow-[0_0_20px_rgba(0,102,255,0.4)] hover:shadow-[0_0_30px_rgba(0,102,255,0.6)] hover:scale-105">
                     <i class="fa-solid fa-user-shield mr-1"></i> Admin
                 </a>
             </div>
@@ -92,163 +230,242 @@
 
         <!-- User Profile -->
         <div class="p-4 border-t border-slate-800">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 group">
                 <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100"
-                    class="w-10 h-10 rounded-full border border-slate-700">
-                <div class="overflow-hidden">
+                    class="w-10 h-10 rounded-full border-2 border-primary shadow-lg group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,102,255,0.6)] transition-all duration-300">
+                <div class="overflow-hidden flex-1">
                     <div class="text-white text-sm font-bold truncate">John Smith</div>
                     <div class="text-xs text-slate-500 truncate">System Admin</div>
                 </div>
-                <a href="index.html" class="ml-auto text-slate-500 hover:text-white" title="Logout"><i
-                        class="fa-solid fa-right-from-bracket"></i></a>
+                <a href="index.html"
+                    class="text-slate-500 hover:text-red-400 hover:scale-110 transition-all duration-200"
+                    title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
     </aside>
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col h-full overflow-hidden relative">
-        <!-- Top Header -->
-        <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 z-40">
-            <button id="sidebar-toggle" class="text-slate-400 hover:text-white lg:hidden">
+        <!-- Top Header with Navbar -->
+        <header
+            class="h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex items-center justify-between px-6 z-40 shadow-lg">
+            <button id="sidebar-toggle"
+                class="text-slate-400 hover:text-white lg:hidden hover:scale-110 transition-all duration-200">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
-            <div class="ml-4 lg:ml-0 flex items-center bg-slate-800 rounded-lg border border-slate-700 w-full max-w-md">
-                <i class="fa-solid fa-magnifying-glass text-slate-500 ml-3"></i>
-                <h1 class="text-2xl font-bold text-white">System Overview</h1>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="index.html"
+                    class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-home text-sm"></i> Home V1
+                </a>
+                <a href="index2.html"
+                    class="text-slate-400 hover:text-secondary transition-colors font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-home text-sm"></i> Home V2
+                </a>
+                <a href="about.html" class="text-slate-400 hover:text-primary transition-colors font-medium">About</a>
+                <a href="services.html"
+                    class="text-slate-400 hover:text-primary transition-colors font-medium">Services</a>
+                <a href="contact.html"
+                    class="text-slate-400 hover:text-primary transition-colors font-medium">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <!-- RTL/LTR Globe Button -->
+                <button id="rtl-toggle"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-gradient-to-br hover:from-primary hover:to-accent text-slate-300 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
+                    title="Toggle Text Direction">
+                    <i class="fa-solid fa-globe"></i>
+                </button>
+
                 <button
-                    class="bg-primary hover:bg-sky-400 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-file-export"></i> General Report
+                    class="btn-glow bg-gradient-to-r from-primary to-accent hover:from-primary-dark hover:to-accent text-white px-6 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-file-export"></i> Export
                 </button>
             </div>
+        </header>
+
+        <!-- Main Scrollable Area -->
+        <main class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-dark via-slate-900 to-slate-950">
 
             <!-- KPI Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                 <!-- Card 1 -->
-                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <div
+                    class="card-premium bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 animate-fade-up">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <p class="text-slate-400 text-sm">Active Clients</p>
-                            <h3 class="text-3xl font-bold text-white mt-1">247</h3>
+                            <p class="text-slate-400 text-sm mb-1">Active Clients</p>
+                            <h3 class="stat-number text-4xl font-bold mt-1">247</h3>
                         </div>
-                        <div class="w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
-                            <i class="fa-solid fa-users"></i>
+                        <div
+                            class="w-12 h-12 bg-gradient-to-br from-primary/20 to-accent/20 rounded-xl flex items-center justify-center text-primary border border-primary/30">
+                            <i class="fa-solid fa-users text-xl"></i>
                         </div>
                     </div>
-                    <div class="text-sm">
-                        <span class="text-secondary"><i class="fa-solid fa-arrow-up"></i> +12%</span>
-                        <span class="text-slate-500 ml-2">vs last month</span>
+                    <div class="text-sm flex items-center gap-2">
+                        <span class="text-secondary flex items-center gap-1"><i class="fa-solid fa-arrow-up"></i>
+                            +12%</span>
+                        <span class="text-slate-500">vs last month</span>
                     </div>
                 </div>
+
                 <!-- Card 2 -->
-                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <div class="card-premium bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 animate-fade-up"
+                    style="animation-delay: 0.1s">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <p class="text-slate-400 text-sm">Open Tickets</p>
-                            <h3 class="text-3xl font-bold text-white mt-1">43</h3>
+                            <p class="text-slate-400 text-sm mb-1">Open Tickets</p>
+                            <h3 class="text-4xl font-bold text-white mt-1">43</h3>
                         </div>
                         <div
-                            class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center text-orange-500">
-                            <i class="fa-solid fa-ticket"></i>
+                            class="w-12 h-12 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl flex items-center justify-center text-orange-400 border border-orange-500/30">
+                            <i class="fa-solid fa-ticket text-xl"></i>
                         </div>
                     </div>
-                    <div class="text-sm">
-                        <span class="text-secondary"><i class="fa-solid fa-arrow-down"></i> -8%</span>
-                        <span class="text-slate-500 ml-2">vs last week</span>
+                    <div class="text-sm flex items-center gap-2">
+                        <span class="text-secondary flex items-center gap-1"><i class="fa-solid fa-arrow-down"></i>
+                            -8%</span>
+                        <span class="text-slate-500">vs last week</span>
                     </div>
                 </div>
+
                 <!-- Card 3 -->
-                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                <div class="card-premium bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-xl p-6 border border-red-500/30 animate-fade-up"
+                    style="animation-delay: 0.2s">
                     <div class="flex justify-between items-start mb-4">
                         <div>
-                            <p class="text-slate-400 text-sm">Threats Blocked</p>
-                            <h3 class="text-3xl font-bold text-white mt-1">2,547</h3>
-                        </div>
-                        <div class="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center text-red-500">
-                            <i class="fa-solid fa-shield-virus"></i>
-                        </div>
-                    </div>
-                    <div class="text-sm">
-                        <span class="text-slate-400 font-mono text-xs">Live Counter</span>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <p class="text-slate-400 text-sm">System Health</p>
-                            <h3 class="text-3xl font-bold text-secondary mt-1">98%</h3>
+                            <p class="text-red-300 text-sm mb-1">Threats Blocked</p>
+                            <h3 class="text-4xl font-bold text-white mt-1">2,547</h3>
                         </div>
                         <div
-                            class="w-10 h-10 bg-secondary/20 rounded-lg flex items-center justify-center text-secondary">
-                            <i class="fa-solid fa-heart-pulse"></i>
+                            class="w-12 h-12 bg-red-500/30 rounded-xl flex items-center justify-center text-red-400 border border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+                            <i class="fa-solid fa-shield-virus text-xl"></i>
                         </div>
                     </div>
                     <div class="text-sm">
-                        <span class="text-slate-500">All systems operational</span>
+                        <span class="text-red-400 font-mono text-xs flex items-center gap-1">
+                            <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span> Live Counter
+                        </span>
                     </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card-premium bg-gradient-to-br from-secondary/10 to-primary/10 rounded-xl p-6 border border-secondary/30 animate-fade-up"
+                    style="animation-delay: 0.3s">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <p class="text-slate-300 text-sm mb-1">System Health</p>
+                            <h3 class="text-4xl font-bold text-secondary mt-1">98%</h3>
+                        </div>
+                        <div
+                            class="w-12 h-12 bg-secondary/30 rounded-xl flex items-center justify-center text-secondary border border-secondary/50 status-dot-pulse">
+                            <i class="fa-solid fa-heart-pulse text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="text-sm text-secondary font-medium">All systems operational</div>
                 </div>
             </div>
 
-            <!-- Charts & Maps -->
+            <!-- Charts & Status -->
             <div class="grid lg:grid-cols-3 gap-6 mb-8">
                 <!-- Main Chart -->
-                <div class="lg:col-span-2 bg-slate-800 rounded-xl p-6 border border-slate-700">
-                    <h3 class="text-lg font-bold text-white mb-4">Network Traffic Overview</h3>
+                <div
+                    class="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 shadow-xl">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-primary"></i>
+                        Network Traffic Overview
+                    </h3>
                     <div class="h-80 w-full relative">
                         <canvas id="trafficChart"></canvas>
                     </div>
                 </div>
+
                 <!-- Status List -->
-                <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
-                    <h3 class="text-lg font-bold text-white mb-4">System Status</h3>
+                <div
+                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 shadow-xl">
+                    <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-server text-secondary"></i>
+                        System Status
+                    </h3>
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between">
+                        <div
+                            class="flex items-center justify-between p-3 bg-secondary/5 rounded-lg hover:bg-secondary/10 transition-all">
                             <div class="flex items-center gap-3">
-                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
-                                <span class="text-slate-300">Core Firewall</span>
+                                <div
+                                    class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(0,212,170,0.8)] animate-pulse">
+                                </div>
+                                <span class="text-slate-300 font-medium">Core Firewall</span>
                             </div>
-                            <span class="text-xs text-secondary bg-secondary/10 px-2 py-1 rounded">Active</span>
+                            <span
+                                class="text-xs text-secondary bg-secondary/20 px-3 py-1 rounded-full font-bold">Active</span>
                         </div>
-                        <div class="flex items-center justify-between">
+                        <div
+                            class="flex items-center justify-between p-3 bg-secondary/5 rounded-lg hover:bg-secondary/10 transition-all">
                             <div class="flex items-center gap-3">
-                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
-                                <span class="text-slate-300">Mail Gateway</span>
+                                <div
+                                    class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(0,212,170,0.8)] animate-pulse">
+                                </div>
+                                <span class="text-slate-300 font-medium">Mail Gateway</span>
                             </div>
-                            <span class="text-xs text-secondary bg-secondary/10 px-2 py-1 rounded">Active</span>
+                            <span
+                                class="text-xs text-secondary bg-secondary/20 px-3 py-1 rounded-full font-bold">Active</span>
                         </div>
-                        <div class="flex items-center justify-between">
+                        <div
+                            class="flex items-center justify-between p-3 bg-yellow-500/5 rounded-lg hover:bg-yellow-500/10 transition-all">
                             <div class="flex items-center gap-3">
-                                <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-                                <span class="text-slate-300">Backup Server 3</span>
+                                <div
+                                    class="w-2 h-2 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.8)] animate-pulse">
+                                </div>
+                                <span class="text-slate-300 font-medium">Backup Server 3</span>
                             </div>
-                            <span class="text-xs text-yellow-500 bg-yellow-500/10 px-2 py-1 rounded">Syncing</span>
+                            <span
+                                class="text-xs text-yellow-500 bg-yellow-500/20 px-3 py-1 rounded-full font-bold">Syncing</span>
                         </div>
-                        <div class="flex items-center justify-between">
+                        <div
+                            class="flex items-center justify-between p-3 bg-secondary/5 rounded-lg hover:bg-secondary/10 transition-all">
                             <div class="flex items-center gap-3">
-                                <div class="w-2 h-2 rounded-full bg-secondary"></div>
-                                <span class="text-slate-300">VPN Nodes</span>
+                                <div
+                                    class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_10px_rgba(0,212,170,0.8)] animate-pulse">
+                                </div>
+                                <span class="text-slate-300 font-medium">VPN Nodes</span>
                             </div>
-                            <span class="text-xs text-secondary bg-secondary/10 px-2 py-1 rounded">56/56 Up</span>
+                            <span class="text-xs text-secondary bg-secondary/20 px-3 py-1 rounded-full font-bold">56/56
+                                Up</span>
                         </div>
                     </div>
-                    <div class="mt-8 p-4 bg-slate-900 rounded-lg border border-slate-800">
-                        <h4 class="text-sm font-bold text-white mb-2">Recent Alert</h4>
-                        <p class="text-xs text-slate-400 mb-2">Suspicious login attempt detected from IP 192.168.1.55
+
+                    <div
+                        class="mt-6 p-4 bg-gradient-to-r from-red-500/10 to-orange-500/10 rounded-lg border border-red-500/30">
+                        <h4 class="text-sm font-bold text-white mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                            Recent Alert
+                        </h4>
+                        <p class="text-xs text-slate-300 mb-3">Suspicious login attempt detected from IP 192.168.1.55
                             (Unknown Location)</p>
-                        <button class="text-xs text-primary hover:underline">Investigate ></button>
+                        <button
+                            class="text-xs text-primary hover:text-white font-bold bg-primary/10 hover:bg-primary px-3 py-1 rounded transition-all">Investigate
+                            →</button>
                     </div>
                 </div>
             </div>
 
             <!-- Recent Alerts Table -->
-            <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
-                <div class="p-6 border-b border-slate-700 flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-white">Recent Security Alerts</h3>
-                    <a href="#" class="text-sm text-primary hover:text-white">View All</a>
+            <div
+                class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-slate-700 overflow-hidden shadow-xl">
+                <div
+                    class="p-6 border-b border-slate-700 flex justify-between items-center bg-gradient-to-r from-slate-800 to-slate-900">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-bell text-red-400"></i>
+                        Recent Security Alerts
+                    </h3>
+                    <a href="#" class="text-sm text-primary hover:text-white font-medium transition-colors">View All
+                        →</a>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm text-slate-400">
-                        <thead class="bg-slate-900 text-xs uppercase font-bold text-slate-300">
+                        <thead class="bg-slate-950 text-xs uppercase font-bold text-slate-300">
                             <tr>
                                 <th class="px-6 py-4">Severity</th>
                                 <th class="px-6 py-4">Event Type</th>
@@ -258,37 +475,40 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-700">
-                            <tr class="hover:bg-slate-700/50 transition-colors">
+                            <tr
+                                class="hover:bg-gradient-to-r hover:from-red-500/5 hover:to-transparent transition-all hover:scale-[1.01] hover:shadow-lg">
                                 <td class="px-6 py-4"><span
-                                        class="bg-red-500/10 text-red-500 px-2 py-1 rounded text-xs font-bold">CRITICAL</span>
+                                        class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-xs font-bold border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.2)]">CRITICAL</span>
                                 </td>
-                                <td class="px-6 py-4 text-white">Ransomware Sig. Blocked</td>
+                                <td class="px-6 py-4 text-white font-medium">Ransomware Sig. Blocked</td>
                                 <td class="px-6 py-4">FinanceCorp Ltd.</td>
                                 <td class="px-6 py-4">2 mins ago</td>
                                 <td class="px-6 py-4 text-right"><button
-                                        class="text-white bg-slate-700 hover:bg-primary px-3 py-1 rounded transition-colors">View</button>
+                                        class="text-white bg-slate-700 hover:bg-primary px-4 py-1.5 rounded-lg transition-all hover:scale-105 font-medium">View</button>
                                 </td>
                             </tr>
-                            <tr class="hover:bg-slate-700/50 transition-colors">
+                            <tr
+                                class="hover:bg-gradient-to-r hover:from-orange-500/5 hover:to-transparent transition-all hover:scale-[1.01] hover:shadow-lg">
                                 <td class="px-6 py-4"><span
-                                        class="bg-orange-500/10 text-orange-500 px-2 py-1 rounded text-xs font-bold">HIGH</span>
+                                        class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-xs font-bold border border-orange-500/30">HIGH</span>
                                 </td>
-                                <td class="px-6 py-4 text-white">Multiple Failed Logins</td>
+                                <td class="px-6 py-4 text-white font-medium">Multiple Failed Logins</td>
                                 <td class="px-6 py-4">TechStart Inc.</td>
                                 <td class="px-6 py-4">15 mins ago</td>
                                 <td class="px-6 py-4 text-right"><button
-                                        class="text-white bg-slate-700 hover:bg-primary px-3 py-1 rounded transition-colors">View</button>
+                                        class="text-white bg-slate-700 hover:bg-primary px-4 py-1.5 rounded-lg transition-all hover:scale-105 font-medium">View</button>
                                 </td>
                             </tr>
-                            <tr class="hover:bg-slate-700/50 transition-colors">
+                            <tr
+                                class="hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent transition-all hover:scale-[1.01] hover:shadow-lg">
                                 <td class="px-6 py-4"><span
-                                        class="bg-primary/10 text-primary px-2 py-1 rounded text-xs font-bold">INFO</span>
+                                        class="bg-primary/20 text-primary px-3 py-1 rounded-full text-xs font-bold border border-primary/30">INFO</span>
                                 </td>
-                                <td class="px-6 py-4 text-white">System Patch Completed</td>
+                                <td class="px-6 py-4 text-white font-medium">System Patch Completed</td>
                                 <td class="px-6 py-4">Global Logistics</td>
                                 <td class="px-6 py-4">1 hour ago</td>
                                 <td class="px-6 py-4 text-right"><button
-                                        class="text-white bg-slate-700 hover:bg-primary px-3 py-1 rounded transition-colors">View</button>
+                                        class="text-white bg-slate-700 hover:bg-primary px-4 py-1.5 rounded-lg transition-all hover:scale-105 font-medium">View</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -296,7 +516,7 @@
                 </div>
             </div>
 
-            </main>
+        </main>
     </div>
 
     <!-- Overlay for mobile sidebar -->
@@ -317,7 +537,8 @@
         toggleBtn.addEventListener('click', toggleSidebar);
         overlay.addEventListener('click', toggleSidebar);
 
-        // Chart.js Init
+
+        // Chart.js with Premium Colors
         const ctx = document.getElementById('trafficChart').getContext('2d');
         const trafficChart = new Chart(ctx, {
             type: 'line',
@@ -326,18 +547,30 @@
                 datasets: [{
                     label: 'Inbound Traffic (GB)',
                     data: [12, 19, 45, 80, 55, 30, 15],
-                    borderColor: '#0ea5e9',
-                    backgroundColor: 'rgba(14, 165, 233, 0.1)',
+                    borderColor: '#0066FF',
+                    backgroundColor: 'rgba(0, 102, 255, 0.1)',
                     tension: 0.4,
-                    fill: true
+                    fill: true,
+                    borderWidth: 3,
+                    pointBackgroundColor: '#0066FF',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
                 }, {
                     label: 'Outbound Traffic (GB)',
                     data: [8, 12, 25, 40, 35, 20, 10],
-                    borderColor: '#8b5cf6',
-                    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                    borderColor: '#7C3AED',
+                    backgroundColor: 'rgba(124, 58, 237, 0.1)',
                     tension: 0.4,
                     fill: true,
-                    borderDash: [5, 5]
+                    borderDash: [5, 5],
+                    borderWidth: 3,
+                    pointBackgroundColor: '#7C3AED',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
                 }]
             },
             options: {
@@ -345,39 +578,33 @@
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        labels: { color: '#94a3b8' }
+                        labels: {
+                            color: '#94a3b8',
+                            font: { size: 14, weight: 'bold' }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                        titleColor: '#fff',
+                        bodyColor: '#94a3b8',
+                        borderColor: '#0066FF',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: true
                     }
                 },
                 scales: {
                     y: {
                         grid: { color: '#1e293b' },
-                        ticks: { color: '#94a3b8' }
+                        ticks: { color: '#94a3b8', font: { weight: 'bold' } }
                     },
                     x: {
                         grid: { color: '#1e293b' },
-                        ticks: { color: '#94a3b8' }
+                        ticks: { color: '#94a3b8', font: { weight: 'bold' } }
                     }
                 }
             }
         });
-
-        // Add RTL button functionality here if generic main.js doesn't cover inline button
-        // RTL Toggle
-        const rtlBtn = document.getElementById('rtl-toggle');
-        if (rtlBtn) {
-            // Check saved preference
-            const currentDir = localStorage.getItem('dir') || 'ltr';
-            document.documentElement.setAttribute('dir', currentDir);
-            rtlBtn.textContent = currentDir === 'ltr' ? 'RTL' : 'LTR';
-
-            rtlBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                const newDir = html.getAttribute('dir') === 'ltr' ? 'rtl' : 'ltr';
-                html.setAttribute('dir', newDir);
-                localStorage.setItem('dir', newDir);
-                rtlBtn.textContent = newDir === 'ltr' ? 'RTL' : 'LTR';
-            });
-        }
     </script>
 </body>
 

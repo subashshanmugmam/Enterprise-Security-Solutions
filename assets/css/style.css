@@ -38,6 +38,10 @@
 
 html {
   scroll-behavior: smooth;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-dark);
 }
 
 body {
@@ -48,6 +52,9 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Typography Enhancements */

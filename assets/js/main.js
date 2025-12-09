@@ -89,20 +89,49 @@ document.addEventListener('DOMContentLoaded', () => {
     if (canvas) {
         initMatrixEffect(canvas);
     }
+
+    // FAQ Accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.closest('.faq-item');
+            const answer = faqItem.querySelector('.faq-answer');
+            const icon = question.querySelector('i');
+
+            // Toggle current item
+            const isOpen = !answer.classList.contains('hidden');
+
+            // Close all other FAQs
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.faq-question i').forEach(i => i.classList.remove('rotate-180'));
+
+            // Toggle current
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        });
+    });
 });
 
 function updateGlobeIcon(dir) {
-    // Optional: You can rotate the globe or change color based on direction
-    // For now, we keep the globe icon static but you could add a tooltip
     const btns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-mobile');
     btns.forEach(btn => {
         btn.setAttribute('aria-label', dir === 'ltr' ? 'Switch to RTL' : 'Switch to LTR');
-        // Add a subtle rotation animation
-        const icon = btn.querySelector('i');
-        if (icon) {
-            icon.style.transform = dir === 'rtl' ? 'rotate(180deg)' : 'rotate(0deg)';
-            icon.style.transition = 'transform 0.5s ease';
-        }
+
+        // Add smooth rotation animation
+        // We use a temporary class or direct style manipulation for the spin
+        btn.style.transition = 'transform 0.6s ease';
+        btn.style.transform = 'rotate(360deg)';
+
+        // Reset rotation after animation
+        setTimeout(() => {
+            btn.style.transition = 'none';
+            btn.style.transform = 'rotate(0deg)';
+            // Force reflow
+            void btn.offsetWidth;
+            btn.style.transition = 'transform 0.6s ease';
+        }, 600);
     });
 }
 

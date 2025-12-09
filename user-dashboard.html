@@ -14,9 +14,13 @@
                 extend: {
                     colors: {
                         dark: '#0f172a',
-                        primary: '#0ea5e9',
-                        secondary: '#10b981',
-                        accent: '#8b5cf6',
+                        primary: '#0066FF',
+                        'primary-dark': '#0052CC',
+                        'primary-light': '#3D8BFF',
+                        secondary: '#00D4AA',
+                        'secondary-dark': '#00B894',
+                        accent: '#7C3AED',
+                        'accent-light': '#A78BFA',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -26,42 +30,157 @@
             }
         }
     </script>
+    <style>
+        @keyframes slideInRight {
+            from {
+                transform: translateX(-10px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 212, 170, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(0, 212, 170, 0.6);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        .animate-slide-in {
+            animation: slideInRight 0.3s ease-out;
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px -12px rgba(0, 102, 255, 0.3);
+        }
+
+        .btn-3d {
+            transition: all 0.2s;
+        }
+
+        .btn-3d:active {
+            transform: scale(0.95);
+        }
+
+        .sidebar-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: linear-gradient(to bottom, #00D4AA, #0066FF);
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+        }
+
+        .sidebar-link:hover::before {
+            transform: translateX(0);
+        }
+
+        .table-row-hover {
+            transition: all 0.2s;
+        }
+
+        .table-row-hover:hover {
+            background: rgba(0, 102, 255, 0.05);
+            box-shadow: inset 0 0 0 1px rgba(0, 102, 255, 0.1);
+            transform: scale(1.01);
+        }
+    </style>
 </head>
 
 <body class="bg-dark text-slate-300 font-sans flex h-screen overflow-hidden">
 
-    <!-- Sidebar (Simplified for User) -->
+    <!-- Sidebar -->
     <aside
-        class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-all duration-300 transform -translate-x-full lg:translate-x-0 fixed lg:static z-50 h-full"
+        class="w-64 bg-slate-900 border-r border-slate-800 flex flex-col transition-all duration-300 transform -translate-x-full lg:translate-x-0 fixed lg:static z-50 h-full shadow-2xl"
         id="sidebar">
         <!-- Logo -->
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 group">
                 <div
-                    class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-secondary to-primary rounded shadow-lg">
+                    class="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-secondary to-primary rounded shadow-lg group-hover:scale-110 transition-transform duration-300">
                     <i class="fa-solid fa-user-shield text-white text-sm"></i>
                 </div>
                 <span class="text-xl font-bold text-white tracking-tight">Client<span
-                        class="text-secondary">Portal</span></span>
+                        class="text-secondary bg-clip-text">Portal</span></span>
             </div>
         </div>
 
         <!-- Nav -->
         <nav class="flex-1 overflow-y-auto py-4 space-y-1 px-3">
-            <a href="#" class="flex items-center gap-3 px-3 py-2 bg-secondary/10 text-secondary rounded-lg font-medium">
-                <i class="fa-solid fa-house w-5 text-center"></i> Overview
+            <a href="#"
+                class="sidebar-link flex items-center gap-3 px-3 py-2 bg-secondary/10 text-secondary rounded-lg font-medium shadow-[0_0_15px_rgba(0,212,170,0.2)]">
+                <i
+                    class="fa-solid fa-house w-5 text-center transition-transform duration-200 group-hover:scale-110"></i>
+                Overview
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-ticket w-5 text-center"></i> My Tickets
+                class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i
+                    class="fa-solid fa-ticket w-5 text-center group-hover:rotate-12 transition-transform duration-200"></i>
+                My Tickets
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-file-invoice-dollar w-5 text-center"></i> Billing
+                class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i
+                    class="fa-solid fa-file-invoice-dollar w-5 text-center group-hover:scale-110 transition-transform duration-200"></i>
+                Billing
             </a>
             <a href="#"
-                class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors">
-                <i class="fa-solid fa-gear w-5 text-center"></i> Settings
+                class="sidebar-link flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all duration-200 group">
+                <i class="fa-solid fa-gear w-5 text-center group-hover:rotate-90 transition-transform duration-300"></i>
+                Settings
             </a>
         </nav>
 
@@ -70,11 +189,11 @@
             <p class="text-xs text-slate-500 mb-2 font-medium">Switch Dashboard:</p>
             <div class="flex gap-2">
                 <a href="user-dashboard.html"
-                    class="flex-1 text-center px-3 py-2 text-xs rounded bg-secondary/20 text-secondary border border-secondary font-bold transition-colors">
+                    class="flex-1 text-center px-3 py-2 text-xs rounded-lg bg-gradient-to-r from-secondary to-secondary-dark text-white border border-secondary font-bold transition-all duration-300 shadow-[0_0_20px_rgba(0,212,170,0.4)] hover:shadow-[0_0_30px_rgba(0,212,170,0.6)] hover:scale-105">
                     <i class="fa-solid fa-user mr-1"></i> Client
                 </a>
                 <a href="admin-dashboard.html"
-                    class="flex-1 text-center px-3 py-2 text-xs rounded bg-slate-800 text-slate-400 hover:bg-primary/20 hover:text-primary hover:border-primary border border-slate-700 font-medium transition-colors">
+                    class="flex-1 text-center px-3 py-2 text-xs rounded-lg bg-slate-800 text-slate-400 hover:bg-gradient-to-r hover:from-primary hover:to-primary-dark hover:text-white hover:border-primary border border-slate-700 font-medium transition-all duration-300 hover:scale-105">
                     <i class="fa-solid fa-user-shield mr-1"></i> Admin
                 </a>
             </div>
@@ -82,116 +201,200 @@
 
         <!-- Profile -->
         <div class="p-4 border-t border-slate-800">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 group">
                 <div
-                    class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 font-bold text-white">
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center border-2 border-slate-700 font-bold text-white group-hover:scale-110 group-hover:rotate-12 transition-all duration-300">
                     AC</div>
-                <div class="overflow-hidden">
+                <div class="overflow-hidden flex-1">
                     <div class="text-white text-sm font-bold truncate">Acme Corp</div>
                     <div class="text-xs text-slate-500 truncate">Client Admin</div>
                 </div>
-                <a href="index.html" class="ml-auto text-slate-500 hover:text-white" title="Logout"><i
-                        class="fa-solid fa-right-from-bracket"></i></a>
+                <a href="index.html"
+                    class="text-slate-500 hover:text-red-400 hover:scale-110 transition-all duration-200"
+                    title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
             </div>
         </div>
     </aside>
 
     <!-- Main Content -->
     <div class="flex-1 flex flex-col h-full overflow-hidden relative">
-        <!-- Top Header -->
-        <header class="h-16 bg-slate-900 border-b border-slate-800 flex items-center justify-between px-6 z-40">
-            <button id="sidebar-toggle" class="text-slate-400 hover:text-white lg:hidden">
+        <!-- Top Header with Navbar -->
+        <header
+            class="h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex items-center justify-between px-6 z-40 shadow-lg">
+            <button id="sidebar-toggle"
+                class="text-slate-400 hover:text-white lg:hidden hover:scale-110 transition-all duration-200">
                 <i class="fa-solid fa-bars text-xl"></i>
             </button>
-            <p class="text-slate-400 text-sm">Here's what's happening with your IT infrastructure today.</p>
-    </div>
 
-    <!-- Status Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 relative overflow-hidden">
-            <div class="absolute right-0 top-0 w-24 h-24 bg-secondary/10 rounded-bl-full -mr-4 -mt-4"></div>
-            <p class="text-slate-400 text-sm font-medium">System Status</p>
-            <h3 class="text-2xl font-bold text-white mt-2 flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-secondary animate-pulse"></span> Operational
-            </h3>
-            <p class="text-xs text-slate-500 mt-2">Last check: 2 mins ago</p>
-        </div>
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="index.html"
+                    class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-home text-sm"></i> Home V1
+                </a>
+                <a href="index2.html"
+                    class="text-slate-400 hover:text-secondary transition-colors font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-home text-sm"></i> Home V2
+                </a>
+                <a href="about.html" class="text-slate-400 hover:text-primary transition-colors font-medium">About</a>
+                <a href="services.html"
+                    class="text-slate-400 hover:text-primary transition-colors font-medium">Services</a>
+                <a href="contact.html"
+                    class="text-slate-400 hover:text-primary transition-colors font-medium">Contact</a>
+            </nav>
 
-        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
-            <p class="text-slate-400 text-sm font-medium">Open Tickets</p>
-            <h3 class="text-2xl font-bold text-white mt-2">2</h3>
-            <p class="text-xs text-slate-500 mt-2">1 pending review</p>
-        </div>
+            <div class="flex items-center gap-4">
+                <!-- RTL/LTR Globe Button -->
+                <button id="rtl-toggle"
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-gradient-to-br hover:from-primary hover:to-accent text-slate-300 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
+                    title="Toggle Text Direction">
+                    <i class="fa-solid fa-globe"></i>
+                </button>
 
-        <div class="bg-slate-800 rounded-xl p-6 border border-slate-700">
-            <p class="text-slate-400 text-sm font-medium">Security Score</p>
-            <h3 class="text-2xl font-bold text-primary mt-2">A+</h3>
-            <p class="text-xs text-slate-500 mt-2">No critical vulnerabilities</p>
-        </div>
-    </div>
+                <div class="hidden lg:block">
+                    <h1 class="text-xl font-bold text-white">Dashboard</h1>
+                    <p class="text-slate-400 text-xs">IT Infrastructure</p>
+                </div>
+            </div>
+        </header>
 
-    <!-- Recent Tickets -->
-    <div class="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden mb-8">
-        <div class="p-6 border-b border-slate-700">
-            <h3 class="text-lg font-bold text-white">Recent Support Tickets</h3>
-        </div>
-        <table class="w-full text-left text-sm text-slate-400">
-            <thead class="bg-slate-900 border-b border-slate-700">
-                <tr>
-                    <th class="px-6 py-4 font-medium text-slate-300">ID</th>
-                    <th class="px-6 py-4 font-medium text-slate-300">Subject</th>
-                    <th class="px-6 py-4 font-medium text-slate-300">Status</th>
-                    <th class="px-6 py-4 font-medium text-slate-300">Last Update</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-700">
-                <tr>
-                    <td class="px-6 py-4 font-mono">#1024</td>
-                    <td class="px-6 py-4 text-white">Email access issue on mobile</td>
-                    <td class="px-6 py-4"><span
-                            class="bg-yellow-500/10 text-yellow-500 px-2 py-1 rounded text-xs font-bold">In
-                            Progress</span></td>
-                    <td class="px-6 py-4">2 hours ago</td>
-                </tr>
-                <tr>
-                    <td class="px-6 py-4 font-mono">#1020</td>
-                    <td class="px-6 py-4 text-white">New employee onboarding request</td>
-                    <td class="px-6 py-4"><span
-                            class="bg-secondary/10 text-secondary px-2 py-1 rounded text-xs font-bold">Resolved</span>
-                    </td>
-                    <td class="px-6 py-4">Yesterday</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <!-- Main Scrollable Area -->
+        <main class="flex-1 overflow-y-auto p-6 bg-gradient-to-br from-dark via-slate-900 to-dark">
 
-    <!-- Quick Help -->
-    <div class="grid md:grid-cols-2 gap-6">
-        <a href="#"
-            class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-primary transition-colors flex items-center gap-4 group">
+            <!-- Status Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div
+                    class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700 relative overflow-hidden animate-fade-up">
+                    <div
+                        class="absolute right-0 top-0 w-24 h-24 bg-gradient-to-br from-secondary/20 to-transparent rounded-bl-full -mr-4 -mt-4">
+                    </div>
+                    <div
+                        class="absolute left-0 bottom-0 w-16 h-16 bg-gradient-to-tr from-primary/10 to-transparent rounded-tr-full -ml-4 -mb-4">
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium mb-3">System Status</p>
+                    <h3 class="text-2xl font-bold text-white mt-2 flex items-center gap-2">
+                        <span
+                            class="w-3 h-3 rounded-full bg-secondary animate-pulse shadow-[0_0_10px_rgba(0,212,170,0.8)]"></span>
+                        Operational
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-2">Last check: 2 mins ago</p>
+                    <div class="mt-4 flex items-center gap-2">
+                        <div class="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
+                            <div
+                                class="h-full bg-gradient-to-r from-secondary to-primary w-full rounded-full animate-pulse">
+                            </div>
+                        </div>
+                        <span class="text-secondary text-xs font-bold">100%</span>
+                    </div>
+                </div>
+
+                <div class="card-hover bg-slate-800 rounded-xl p-6 border border-slate-700 relative overflow-hidden animate-fade-up"
+                    style="animation-delay: 0.1s">
+                    <div
+                        class="absolute right-0 top-0 w-20 h-20 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-full -mr-4 -mt-4">
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium mb-3">Open Tickets</p>
+                    <h3 class="text-4xl font-bold text-white mt-2">2</h3>
+                    <p class="text-xs text-slate-500 mt-2">1 pending review</p>
+                    <div class="mt-4 flex gap-2">
+                        <span
+                            class="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-xs rounded-full border border-yellow-500/20">1
+                            In Progress</span>
+                        <span
+                            class="px-2 py-1 bg-secondary/10 text-secondary text-xs rounded-full border border-secondary/20">1
+                            Resolved</span>
+                    </div>
+                </div>
+
+                <div class="card-hover bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-6 border border-primary/30 relative overflow-hidden animate-fade-up"
+                    style="animation-delay: 0.2s">
+                    <div
+                        class="absolute right-0 top-0 w-32 h-32 bg-gradient-to-br from-primary/30 to-transparent rounded-bl-full -mr-8 -mt-8">
+                    </div>
+                    <p class="text-slate-300 text-sm font-medium mb-3">Security Score</p>
+                    <h3
+                        class="text-5xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mt-2">
+                        A+</h3>
+                    <p class="text-xs text-slate-400 mt-2 flex items-center gap-1">
+                        <i class="fa-solid fa-shield-halved text-primary"></i> No critical vulnerabilities
+                    </p>
+                </div>
+            </div>
+
+            <!-- Recent Tickets -->
             <div
-                class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-book"></i>
+                class="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700 overflow-hidden mb-8 shadow-xl">
+                <div class="p-6 border-b border-slate-700 bg-gradient-to-r from-slate-800 to-slate-900">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-ticket text-primary"></i>
+                        Recent Support Tickets
+                    </h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-400">
+                        <thead class="bg-slate-900 border-b border-slate-700">
+                            <tr>
+                                <th class="px-6 py-4 font-medium text-slate-300">ID</th>
+                                <th class="px-6 py-4 font-medium text-slate-300">Subject</th>
+                                <th class="px-6 py-4 font-medium text-slate-300">Status</th>
+                                <th class="px-6 py-4 font-medium text-slate-300">Last Update</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700">
+                            <tr class="table-row-hover">
+                                <td class="px-6 py-4 font-mono text-primary">#1024</td>
+                                <td class="px-6 py-4 text-white font-medium">Email access issue on mobile</td>
+                                <td class="px-6 py-4"><span
+                                        class="bg-yellow-500/10 text-yellow-500 px-3 py-1 rounded-full text-xs font-bold border border-yellow-500/20">In
+                                        Progress</span></td>
+                                <td class="px-6 py-4">2 hours ago</td>
+                            </tr>
+                            <tr class="table-row-hover">
+                                <td class="px-6 py-4 font-mono text-primary">#1020</td>
+                                <td class="px-6 py-4 text-white font-medium">New employee onboarding request</td>
+                                <td class="px-6 py-4"><span
+                                        class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-bold border border-secondary/20">Resolved</span>
+                                </td>
+                                <td class="px-6 py-4">Yesterday</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div>
-                <h4 class="text-white font-bold">Knowledge Base</h4>
-                <p class="text-sm text-slate-400">Browse tutorials and guides.</p>
-            </div>
-        </a>
-        <a href="#"
-            class="bg-slate-800 p-6 rounded-xl border border-slate-700 hover:border-secondary transition-colors flex items-center gap-4 group">
-            <div
-                class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
-                <i class="fa-solid fa-phone"></i>
-            </div>
-            <div>
-                <h4 class="text-white font-bold">Emergency Support</h4>
-                <p class="text-sm text-slate-400">Call our 24/7 hotline.</p>
-            </div>
-        </a>
-    </div>
 
-    </main>
+            <!-- Quick Help -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <a href="#"
+                    class="group bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 hover:border-primary transition-all duration-300 flex items-center gap-4 card-hover">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-white text-xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg group-hover:text-primary transition-colors">Knowledge
+                            Base</h4>
+                        <p class="text-sm text-slate-400">Browse tutorials and guides.</p>
+                    </div>
+                    <i
+                        class="fa-solid fa-arrow-right text-slate-600 group-hover:text-primary ml-auto group-hover:translate-x-2 transition-all duration-300"></i>
+                </a>
+                <a href="#"
+                    class="group bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 hover:border-secondary transition-all duration-300 flex items-center gap-4 card-hover">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-secondary to-secondary-dark rounded-xl flex items-center justify-center text-white text-xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 animate-pulse-glow">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold text-lg group-hover:text-secondary transition-colors">Emergency
+                            Support</h4>
+                        <p class="text-sm text-slate-400">Call our 24/7 hotline.</p>
+                    </div>
+                    <i
+                        class="fa-solid fa-arrow-right text-slate-600 group-hover:text-secondary ml-auto group-hover:translate-x-2 transition-all duration-300"></i>
+                </a>
+            </div>
+
+        </main>
     </div>
 
     <!-- Overlay for mobile sidebar -->
@@ -199,7 +402,7 @@
 
     <script src="assets/js/main.js"></script>
     <script>
-        // Sidebar Toggle logic (can be shared, but inlined for simplicity in demo)
+        // Sidebar Toggle
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('sidebar-overlay');
         const toggleBtn = document.getElementById('sidebar-toggle');
@@ -213,22 +416,7 @@
             overlay.addEventListener('click', toggleSidebar);
         }
 
-        // Add RTL button functionality
-        const rtlBtn = document.getElementById('rtl-toggle');
-        if (rtlBtn) {
-            // Check saved preference
-            const currentDir = localStorage.getItem('dir') || 'ltr';
-            document.documentElement.setAttribute('dir', currentDir);
-            rtlBtn.textContent = currentDir === 'ltr' ? 'RTL' : 'LTR';
 
-            rtlBtn.addEventListener('click', () => {
-                const html = document.documentElement;
-                const newDir = html.getAttribute('dir') === 'ltr' ? 'rtl' : 'ltr';
-                html.setAttribute('dir', newDir);
-                localStorage.setItem('dir', newDir);
-                rtlBtn.textContent = newDir === 'ltr' ? 'RTL' : 'LTR';
-            });
-        }
     </script>
 </body>
 
