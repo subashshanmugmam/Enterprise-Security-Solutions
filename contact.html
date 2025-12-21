@@ -31,51 +31,59 @@
 
 <body class="bg-dark text-slate-300 font-sans">
 
-    <!-- Navigation (Reduced for brevity, similar to others) -->
-    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-nav force-dark-nav">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-2 group">
                 <div
                     class="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary to-accent rounded-lg shadow-lg group-hover:shadow-glow transition-all">
-                    <i class="fa-solid fa-headset text-white text-xl"></i>
+                    <i class="fa-solid fa-shield-halved text-white text-xl"></i>
                 </div>
                 <span class="text-2xl font-bold text-white tracking-tight">Secure<span
                         class="text-primary">Tech</span></span>
             </a>
+
             <div class="hidden md:flex items-center gap-8">
                 <div class="group relative">
                     <button
-                        class="flex items-center gap-1 text-white font-medium hover:text-primary transition-colors py-2">
+                        class="flex items-center gap-1 text-slate-300 font-medium hover:text-white transition-colors py-2">
                         Home <i
                             class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
                     </button>
                     <div
-                        class="dropdown-menu absolute top-full left-0 w-48 bg-white text-slate-800 rounded-lg shadow-xl overflow-hidden mt-2 border border-slate-100">
+                        class="dropdown-menu absolute top-full left-0 w-56 bg-white rounded-lg shadow-xl overflow-hidden mt-2 border border-slate-100 p-2">
                         <a href="index.html"
-                            class="block px-4 py-3 hover:bg-slate-50 border-b border-slate-100 transition-colors font-medium">
-                            <i class="fa-solid fa-house-signal mr-2"></i> Home Ver 1
+                            class="flex items-center px-4 py-3 hover:bg-slate-50 rounded-md transition-colors font-medium text-slate-700">
+                            <span class="w-8 flex justify-center"><i class="fa-solid fa-house-signal"></i></span>
+                            <div>
+                                <span class="block text-sm font-bold">Home Version 1</span>
+                                <span class="block text-xs text-slate-400">Classic</span>
+                            </div>
                         </a>
-                        <a href="index2.html" class="block px-4 py-3 hover:bg-slate-50 transition-colors font-medium">
-                            <i class="fa-solid fa-shield-cat mr-2"></i> Home Ver 2
+                        <a href="index2.html"
+                            class="flex items-center px-4 py-3 hover:bg-slate-50 rounded-md transition-colors font-medium text-slate-700">
+                            <span class="w-8 flex justify-center"><i class="fa-solid fa-shield-cat"></i></span>
+                            <div>
+                                <span class="block text-sm font-bold">Home Version 2</span>
+                                <span class="block text-xs text-slate-400">Immersive</span>
+                            </div>
                         </a>
                     </div>
                 </div>
                 <a href="about.html" class="text-slate-300 hover:text-white font-medium transition-colors">About</a>
-                <a href="services.html"
-                    class="text-slate-300 hover:text-white font-medium transition-colors">Services</a>
+                <a href="services.html" class="text-slate-300 hover:text-white font-medium transition-colors">Services</a>
                 <a href="contact.html" class="text-white font-medium transition-colors">Contact</a>
 
-                <!-- Dashboard Dropdown -->
                 <div class="group relative">
                     <button
-                        class="flex items-center gap-1 text-white font-medium hover:text-primary transition-colors py-2">
+                        class="flex items-center gap-1 text-slate-300 font-medium hover:text-white transition-colors py-2">
                         Dashboard <i
                             class="fa-solid fa-chevron-down text-xs transition-transform group-hover:rotate-180"></i>
                     </button>
                     <div
-                        class="dropdown-menu absolute top-full left-0 w-56 bg-white text-slate-800 rounded-lg shadow-xl overflow-hidden mt-2 border border-slate-100 p-2">
+                        class="dropdown-menu absolute top-full left-0 w-56 bg-white rounded-lg shadow-xl overflow-hidden mt-2 border border-slate-100 p-2">
                         <a href="user-dashboard.html"
-                            class="flex items-center px-4 py-3 hover:bg-slate-50 rounded-md transition-colors font-medium text-slate-600">
+                            class="flex items-center px-4 py-3 hover:bg-slate-50 rounded-md transition-colors font-medium text-slate-700">
                             <span class="w-8 flex justify-center"><i class="fa-solid fa-user text-secondary"></i></span>
                             <div>
                                 <span class="block text-sm font-bold">Client Portal</span>
@@ -83,7 +91,7 @@
                             </div>
                         </a>
                         <a href="admin-dashboard.html"
-                            class="flex items-center px-4 py-3 hover:bg-slate-50 rounded-md transition-colors font-medium text-slate-600">
+                            class="flex items-center px-4 py-3 hover:bg-slate-50 rounded-md transition-colors font-medium text-slate-700">
                             <span class="w-8 flex justify-center"><i
                                     class="fa-solid fa-user-shield text-primary"></i></span>
                             <div>
@@ -94,13 +102,15 @@
                     </div>
                 </div>
             </div>
+
             <div class="hidden md:flex items-center gap-4">
                 <button id="rtl-toggle"
-                    class="text-sm font-mono text-slate-400 hover:text-white border border-slate-700 px-3 py-1 rounded transition-colors">RTL</button>
-                <a href="login.html"
-                    class="px-5 py-2.5 rounded-lg bg-primary/10 text-primary border border-primary/20 hover:bg-primary hover:text-white hover:shadow-glow transition-all duration-300 font-medium">
-                    Client Portal
-                </a>
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                    title="Toggle Region">
+                    <i class="fa-solid fa-globe"></i>
+                </button>
+                <a href="signup.html" class="btn-secondary">Sign Up</a>
+                <a href="login.html" class="btn-primary">Login</a>
             </div>
 
             <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">
@@ -109,7 +119,7 @@
         </div>
 
         <div id="mobile-menu"
-            class="hidden md:hidden bg-dark border-t border-slate-800 absolute w-full left-0 font-medium z-50">
+            class="hidden md:hidden bg-slate-900 border-t border-slate-800 absolute w-full left-0 font-medium z-50 shadow-xl">
             <div class="p-6 flex flex-col gap-4 bg-slate-900">
                 <div class="group dropdown-toggle cursor-pointer border-b border-slate-800 pb-2">
                     <div class="flex justify-between items-center text-white mb-2">
@@ -117,14 +127,10 @@
                         <i class="fa-solid fa-chevron-down chevron-icon transition-transform text-xs"></i>
                     </div>
                     <div class="dropdown-menu hidden pl-4 space-y-2 mt-2">
-                        <a href="index.html" class="block text-primary py-1">Home Version 1</a>
-                        <a href="index2.html" class="block text-slate-400 hover:text-white py-1">Home Version 2</a>
+                        <a href="index.html" class="block text-slate-300 hover:text-white py-1">Home Version 1</a>
+                        <a href="index2.html" class="block text-slate-300 hover:text-white py-1">Home Version 2</a>
                     </div>
                 </div>
-                <a href="about.html" class="text-slate-300 hover:text-white border-b border-slate-800 pb-2">About</a>
-                <a href="services.html"
-                    class="text-slate-300 hover:text-white border-b border-slate-800 pb-2">Services</a>
-                <a href="contact.html" class="text-primary hover:text-white border-b border-slate-800 pb-2">Contact</a>
 
                 <div class="group dropdown-toggle cursor-pointer border-b border-slate-800 pb-2">
                     <div class="flex justify-between items-center text-white mb-2">
@@ -132,20 +138,27 @@
                         <i class="fa-solid fa-chevron-down chevron-icon transition-transform text-xs"></i>
                     </div>
                     <div class="dropdown-menu hidden pl-4 space-y-2 mt-2">
-                        <a href="user-dashboard.html" class="block text-slate-300 hover:text-white py-1">User Dashboard</a>
-                        <a href="admin-dashboard.html" class="block text-slate-300 hover:text-white py-1">Admin Dashboard</a>
+                        <a href="user-dashboard.html" class="block text-slate-300 hover:text-white py-1">Client Portal</a>
+                        <a href="admin-dashboard.html" class="block text-slate-300 hover:text-white py-1">Admin Portal</a>
                     </div>
                 </div>
 
+                <a href="about.html" class="text-slate-300 hover:text-white border-b border-slate-800 pb-2">About</a>
+                <a href="services.html" class="text-slate-300 hover:text-white border-b border-slate-800 pb-2">Services</a>
+                <a href="contact.html" class="text-slate-300 hover:text-white border-b border-slate-800 pb-2">Contact</a>
+
                 <!-- Mobile RTL Toggle -->
                 <div class="flex justify-between items-center border-b border-slate-800 pb-2">
-                    <span class="text-slate-300">Language Direction</span>
+                    <span class="text-slate-300">Region</span>
                     <button id="rtl-toggle-mobile"
-                        class="px-3 py-1 text-sm bg-slate-800 rounded border border-slate-700 text-slate-300">RTL</button>
+                        class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-800"><i
+                            class="fa-solid fa-globe"></i></button>
                 </div>
 
+                <a href="signup.html"
+                    class="text-center w-full bg-secondary text-white py-3 rounded-lg mt-2 shadow-lg hover:bg-secondary/90 transition-colors">Create Account</a>
                 <a href="login.html"
-                    class="text-center w-full bg-primary text-white py-3 rounded-lg mt-2 shadow-lg">Login to Portal</a>
+                    class="text-center w-full bg-primary text-white py-3 rounded-lg mt-2 shadow-lg hover:bg-primary/90 transition-colors">Login</a>
             </div>
         </div>
     </nav>
@@ -280,7 +293,7 @@
     <!-- Footer -->
     <footer class="bg-dark pt-16 pb-8 border-t border-slate-800 mt-12">
         <div class="container mx-auto px-6 text-center text-slate-500 text-sm">
-            &copy; 2024 SecureTech.
+            &copy; 2025 SecureTech.
         </div>
     </footer>
 

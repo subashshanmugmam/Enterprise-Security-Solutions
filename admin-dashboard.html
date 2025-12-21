@@ -185,7 +185,7 @@
 
     <!-- Sidebar -->
     <aside
-        class="w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-e border-slate-800 flex flex-col transition-all duration-300 transform ltr:-translate-x-full rtl:translate-x-full lg:!transform-none fixed lg:static z-50 h-full shadow-2xl"
+        class="w-[85vw] max-w-[20rem] sm:w-64 bg-gradient-to-b from-slate-900 to-slate-950 border-e border-slate-800 flex flex-col transition-all duration-300 transform ltr:-translate-x-full rtl:translate-x-full lg:!transform-none fixed lg:static z-50 h-full shadow-2xl"
         id="sidebar">
         <!-- Logo -->
         <div class="h-16 flex items-center px-6 border-b border-slate-800">
@@ -272,14 +272,20 @@
     <div class="flex-1 flex flex-col min-h-screen lg:h-full overflow-hidden relative">
         <!-- Top Header with Navbar -->
         <header
-            class="admin-topbar h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex items-center justify-between px-6 z-40 shadow-lg">
-            <button id="sidebar-toggle"
-                class="text-slate-400 hover:text-white lg:hidden hover:scale-110 transition-all duration-200">
-                <i class="fa-solid fa-bars text-xl"></i>
-            </button>
+            class="admin-topbar min-h-16 bg-gradient-to-r from-slate-900 to-slate-950 border-b border-slate-800 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 px-4 sm:px-6 py-3 sm:py-0 z-40 shadow-lg">
+            <div class="flex items-center gap-3">
+                <button id="sidebar-toggle"
+                    class="text-slate-400 hover:text-white lg:hidden hover:scale-110 transition-all duration-200">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="lg:hidden leading-tight">
+                    <div class="text-white font-bold text-sm">Admin Dashboard</div>
+                    <div class="text-slate-500 text-xs">SecureTech Portal</div>
+                </div>
+            </div>
 
             <!-- Navigation Links -->
-            <nav class="hidden md:block">
+            <nav class="hidden lg:block">
                 <ul class="admin-nav">
                     <li><a href="index.html"
                             class="text-slate-400 hover:text-primary transition-colors font-medium flex items-center gap-2">
@@ -304,7 +310,7 @@
                 </ul>
             </nav>
 
-            <div class="admin-actions flex items-center gap-4 ms-auto">
+            <div class="admin-actions flex items-center gap-3 sm:gap-4 ms-auto w-full sm:w-auto justify-end">
                 <!-- RTL/LTR Globe Button -->
                 <button id="rtl-toggle"
                     class="w-10 h-10 flex items-center justify-center rounded-full bg-slate-800 hover:bg-gradient-to-br hover:from-primary hover:to-accent text-slate-300 hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-[0_0_20px_rgba(0,102,255,0.4)]"
@@ -313,8 +319,8 @@
                 </button>
 
                 <button
-                    class="btn-glow bg-gradient-to-r from-primary to-accent hover:from-primary-dark hover:to-accent text-white px-6 py-2 rounded-lg text-sm font-bold flex items-center gap-2">
-                    <i class="fa-solid fa-file-export"></i> Export
+                    class="btn-glow bg-gradient-to-r from-primary to-accent hover:from-primary-dark hover:to-accent text-white px-3 sm:px-6 py-2 rounded-lg text-xs sm:text-sm font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-file-export"></i> <span class="hidden sm:inline">Export</span>
                 </button>
             </div>
         </header>
@@ -563,12 +569,9 @@
         const toggleBtn = document.getElementById('sidebar-toggle');
 
         function setSidebarDirection() {
-            // Tailwind logical classes now handle most of this, but we need to toggle visibility classes manually for mobile
-            // The class 'lg:translate-x-0' handles desktop visibility.
-            // Mobile hidden state is what we toggle.
-            // In LTR: hidden = -translate-x-full
-            // In RTL: hidden = translate-x-full
-            // Logic below ensures we toggle the correct class based on dir
+            // Ensure mobile state is reset when direction changes
+            sidebar.classList.remove('!translate-x-0');
+            overlay.classList.add('hidden');
         }
 
         function toggleSidebar() {
@@ -589,20 +592,21 @@
             if (window.innerWidth >= 1024) {
                 sidebar.classList.remove('!translate-x-0');
                 overlay.classList.add('hidden');
+            } else {
+                setSidebarDirection();
             }
         });
 
-        toggleBtn.addEventListener('click', toggleSidebar);
-        overlay.addEventListener('click', toggleSidebar);
+        if (toggleBtn && overlay) {
+            setSidebarDirection();
+            toggleBtn.addEventListener('click', toggleSidebar);
+            overlay.addEventListener('click', toggleSidebar);
+        }
 
         // When RTL toggles, re-align sidebar and close overlay
         const rtlBtns = document.querySelectorAll('#rtl-toggle, #rtl-toggle-mobile');
         rtlBtns.forEach(btn => btn.addEventListener('click', () => {
-            // Close sidebar on direction change for mobile to avoid confusion
-            if (window.innerWidth < 1024) {
-                sidebar.classList.remove('!translate-x-0');
-                overlay.classList.add('hidden');
-            }
+            if (window.innerWidth < 1024) setSidebarDirection();
         }));
 
 

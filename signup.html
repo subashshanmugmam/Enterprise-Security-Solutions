@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - SecureTech</title>
+    <title>Create Account - SecureTech</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/css/style.css">
@@ -29,7 +29,7 @@
     </script>
 </head>
 
-<body class="bg-dark text-slate-300 font-sans min-h-screen">
+<body class="bg-dark text-white font-sans min-h-screen">
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 transition-all duration-300 glass-nav force-dark-nav">
@@ -123,22 +123,41 @@
         </div>
     </nav>
 
-    <div class="flex min-h-screen pt-24">
+    <div class="min-h-screen flex pt-24">
         <!-- Left Side: Form -->
         <div
             class="w-full lg:w-2/5 p-8 md:p-12 flex flex-col justify-center relative z-10 bg-slate-900 border-r border-slate-800">
             <div class="max-w-md mx-auto w-full">
-                <div class="mb-8">
+                <div class="flex items-center gap-2 mb-8">
+                    <div
+                        class="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-primary to-accent rounded-lg shadow-lg">
+                        <i class="fa-solid fa-shield-halved text-white text-xl"></i>
+                    </div>
                     <span class="text-2xl font-bold text-white tracking-tight">Secure<span
                             class="text-primary">Tech</span></span>
                 </div>
 
-                <h2 class="text-3xl font-bold text-white mb-2">Welcome Back</h2>
-                <p class="text-slate-400 mb-8">Access your secure client portal.</p>
+                <h2 class="text-3xl font-bold text-white mb-2">Create your account</h2>
+                <p class="text-slate-400 mb-8">Start your SecureTech portal access in minutes.</p>
 
-                <form id="loginForm" class="space-y-6">
+                <form id="signupForm" class="space-y-5">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-2">First Name</label>
+                            <input type="text" id="firstName" required
+                                class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
+                                placeholder="Alex">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-400 mb-2">Last Name</label>
+                            <input type="text" id="lastName" required
+                                class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors"
+                                placeholder="Morgan">
+                        </div>
+                    </div>
+
                     <div>
-                        <label class="block text-sm font-medium text-slate-400 mb-2">Email Address</label>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">Work Email</label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"><i
                                     class="fa-solid fa-envelope"></i></span>
@@ -149,59 +168,71 @@
                     </div>
 
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="block text-sm font-medium text-slate-400">Password</label>
-                            <a href="#" class="text-primary text-sm hover:underline">Forgot password?</a>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">Company</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"><i
+                                    class="fa-solid fa-building"></i></span>
+                            <input type="text" id="company" required
+                                class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-3 text-white focus:outline-none focus:border-primary transition-colors input-icon-left"
+                                placeholder="Company Inc.">
                         </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">Password</label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"><i
                                     class="fa-solid fa-lock"></i></span>
-                            <input type="password" id="password" required
+                            <input type="password" id="password" minlength="8" required
                                 class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-10 py-3 text-white focus:outline-none focus:border-primary transition-colors input-icon-left input-icon-right"
-                                placeholder="••••••••">
+                                placeholder="Minimum 8 characters">
                             <button type="button"
                                 class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
-                                onclick="togglePassword()">
+                                data-toggle-password="password">
                                 <i class="fa-solid fa-eye"></i>
                             </button>
                         </div>
                     </div>
 
-                    <div class="flex items-center">
-                        <input type="checkbox" id="remember"
-                            class="w-4 h-4 rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary">
-                        <label for="remember" class="ml-2 text-sm text-slate-400">Remember this device</label>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-400 mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"><i
+                                    class="fa-solid fa-lock"></i></span>
+                            <input type="password" id="confirmPassword" minlength="8" required
+                                class="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-10 py-3 text-white focus:outline-none focus:border-primary transition-colors input-icon-left input-icon-right"
+                                placeholder="Re-enter password">
+                            <button type="button"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white"
+                                data-toggle-password="confirmPassword">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
+                        <p id="passwordHelp" class="hidden mt-2 text-xs text-red-400">Passwords do not match.</p>
                     </div>
 
-                    <button type="submit"
-                        class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-sky-400 hover:shadow-glow transition-all flex justify-center items-center gap-2">
-                        <span>Sign In</span>
+                    <div class="flex items-start gap-3">
+                        <input type="checkbox" id="terms" required
+                            class="w-4 h-4 mt-1 rounded border-slate-700 bg-slate-800 text-primary focus:ring-primary">
+                        <label for="terms" class="text-sm text-slate-400">
+                            I agree to the <a href="#" class="text-primary hover:underline">Terms</a> and
+                            <a href="#" class="text-primary hover:underline">Privacy Policy</a>.
+                        </label>
+                    </div>
+
+                    <button type="submit" id="signupBtn"
+                        class="w-full py-3 bg-secondary text-white font-bold rounded-lg hover:bg-emerald-400 hover:shadow-glow transition-all flex justify-center items-center gap-2">
+                        <span>Create Account</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </button>
+
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Note: This is a demo UI (no backend). Submitting will redirect you to the login page.
+                    </p>
                 </form>
 
-                <div class="mt-8 relative text-center">
-                    <hr class="border-slate-800">
-                    <span
-                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 px-4 text-sm text-slate-500">Or
-                        continue with</span>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4 mt-6">
-                    <button
-                        class="flex items-center justify-center gap-2 py-2.5 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors">
-                        <i class="fa-brands fa-google text-white"></i>
-                        <span class="text-sm">Google</span>
-                    </button>
-                    <button
-                        class="flex items-center justify-center gap-2 py-2.5 border border-slate-700 rounded-lg hover:bg-slate-800 transition-colors">
-                        <i class="fa-brands fa-microsoft text-blue-400"></i>
-                        <span class="text-sm">Microsoft</span>
-                    </button>
-                </div>
-
                 <p class="mt-8 text-center text-sm text-slate-400">
-                    Don't have an account? <a href="signup.html" class="text-primary hover:underline">Sign up</a>
+                    Already have an account? <a href="login.html" class="text-primary hover:underline">Sign in</a>
                 </p>
             </div>
         </div>
@@ -210,35 +241,38 @@
         <div class="hidden lg:flex w-3/5 relative bg-slate-900 overflow-hidden items-center justify-center">
             <div class="absolute inset-0 z-0">
                 <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1920"
-                    class="w-full h-full object-cover opacity-30">
+                    class="w-full h-full object-cover opacity-25">
                 <div class="absolute inset-0 bg-gradient-to-r from-slate-900 to-transparent"></div>
             </div>
 
             <div class="relative z-10 max-w-lg text-center p-12 glass-card rounded-2xl mx-12">
                 <div
-                    class="w-20 h-20 bg-secondary/20 rounded-full flex items-center justify-center text-secondary text-4xl mx-auto mb-6 animate-pulse">
-                    <i class="fa-solid fa-shield-heart"></i>
+                    class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center text-primary text-4xl mx-auto mb-6 animate-pulse">
+                    <i class="fa-solid fa-user-shield"></i>
                 </div>
-                <h3 class="text-3xl font-bold text-white mb-4">Enterprise-Grade Security</h3>
-                <p class="text-slate-300 text-lg mb-8">Access your real-time threat dashboard, compliance reports, and
-                    support tickets in one secure location.</p>
+                <h3 class="text-3xl font-bold text-white mb-4">One Account. Full Visibility.</h3>
+                <p class="text-slate-300 text-lg mb-8">Get access to your dashboards, reports, and support — secured by
+                    modern identity controls.</p>
+
                 <div class="grid grid-cols-2 gap-4 text-left">
-                    <div class="flex items-center gap-3 text-slate-400 bg-slate-900/50 p-3 rounded-lg">
-                        <i class="fa-solid fa-lock text-primary"></i> SSL Encrypted
+                    <div class="flex items-center gap-3 text-slate-300 bg-slate-900/50 p-3 rounded-lg">
+                        <i class="fa-solid fa-shield text-secondary"></i> Security Insights
                     </div>
-                    <div class="flex items-center gap-3 text-slate-400 bg-slate-900/50 p-3 rounded-lg">
-                        <i class="fa-solid fa-fingerprint text-secondary"></i> Biometric Ready
+                    <div class="flex items-center gap-3 text-slate-300 bg-slate-900/50 p-3 rounded-lg">
+                        <i class="fa-solid fa-headset text-primary"></i> Priority Support
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Script to handle simulated login -->
     <script>
-        function togglePassword() {
-            const input = document.getElementById('password');
-            const icon = event.currentTarget.querySelector('i');
+        function togglePasswordVisibility(inputId, buttonEl) {
+            const input = document.getElementById(inputId);
+            const icon = buttonEl.querySelector('i');
+
+            if (!input || !icon) return;
+
             if (input.type === 'password') {
                 input.type = 'text';
                 icon.classList.remove('fa-eye');
@@ -250,28 +284,35 @@
             }
         }
 
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const btn = this.querySelector('button[type="submit"]');
+        document.querySelectorAll('[data-toggle-password]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                togglePasswordVisibility(btn.getAttribute('data-toggle-password'), btn);
+            });
+        });
 
-            // Loading State
-            const originalContent = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Authenticating...';
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const help = document.getElementById('passwordHelp');
+            const btn = document.getElementById('signupBtn');
+
+            if (password !== confirmPassword) {
+                help.classList.remove('hidden');
+                return;
+            }
+
+            help.classList.add('hidden');
+
+            const original = btn.innerHTML;
             btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Creating...';
 
             setTimeout(() => {
-                if (email === 'admin@securetech.com' && password === 'admin123') {
-                    window.location.href = 'admin-dashboard.html';
-                } else if (email === 'client@company.com' && password === 'client123') {
-                    window.location.href = 'user-dashboard.html';
-                } else {
-                    alert('Invalid credentials. Please try again.');
-                    btn.innerHTML = originalContent;
-                    btn.disabled = false;
-                }
-            }, 1500);
+                window.location.href = 'login.html';
+            }, 900);
         });
     </script>
 

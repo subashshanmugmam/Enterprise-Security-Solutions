@@ -57,6 +57,26 @@ body {
   padding: 0;
 }
 
+/* Force dark navbar even on light pages */
+.force-dark-nav {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-bottom-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+.light-theme .force-dark-nav {
+  background: rgba(15, 23, 42, 0.85) !important;
+  border-bottom-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+/* Fix icon-input overlay caused by global input padding */
+.input-icon-left {
+  padding-left: 2.5rem !important;
+}
+
+.input-icon-right {
+  padding-right: 2.5rem !important;
+}
+
 /* Typography Enhancements */
 h1,
 h2,
