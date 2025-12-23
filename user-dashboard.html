@@ -374,7 +374,7 @@
                             <span
                                 class="text-xs text-slate-400 bg-slate-900/60 border border-slate-700 px-3 py-1 rounded-full">Auto-updated</span>
                         </div>
-                        <div class="h-64">
+                        <div class="dashboard-chart">
                             <canvas id="ticketsChart"></canvas>
                         </div>
                     </div>
@@ -388,7 +388,7 @@
                             <span
                                 class="text-xs text-secondary bg-secondary/10 border border-secondary/20 px-3 py-1 rounded-full">Good</span>
                         </div>
-                        <div class="h-64">
+                        <div class="dashboard-chart dashboard-chart--compact">
                             <canvas id="securityChart"></canvas>
                         </div>
                     </div>
@@ -568,6 +568,13 @@
             const ticketsEl = document.getElementById('ticketsChart');
             const securityEl = document.getElementById('securityChart');
 
+            const isMobile = window.matchMedia('(max-width: 640px)').matches;
+            const gridColor = 'rgba(148, 163, 184, 0.12)';
+            const tickColor = '#94a3b8';
+            const legendSize = isMobile ? 11 : 13;
+            const tickSize = isMobile ? 10 : 12;
+            const legendPosition = isMobile ? 'bottom' : 'top';
+
             if (ticketsEl) {
                 new Chart(ticketsEl.getContext('2d'), {
                     type: 'bar',
@@ -585,13 +592,24 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: isMobile ? false : undefined,
                         plugins: {
-                            legend: { labels: { color: '#94a3b8' } },
+                            legend: {
+                                position: legendPosition,
+                                labels: { color: tickColor, font: { size: legendSize } }
+                            },
                             tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1' }
                         },
                         scales: {
-                            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148, 163, 184, 0.12)' } },
-                            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148, 163, 184, 0.12)' }, beginAtZero: true }
+                            x: {
+                                ticks: { color: tickColor, font: { size: tickSize }, maxRotation: 0, autoSkip: true, maxTicksLimit: isMobile ? 4 : 7 },
+                                grid: { color: gridColor }
+                            },
+                            y: {
+                                ticks: { color: tickColor, font: { size: tickSize } },
+                                grid: { color: gridColor },
+                                beginAtZero: true
+                            }
                         }
                     }
                 });
@@ -618,13 +636,25 @@
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
+                        animation: isMobile ? false : undefined,
                         plugins: {
-                            legend: { labels: { color: '#94a3b8' } },
+                            legend: {
+                                position: legendPosition,
+                                labels: { color: tickColor, font: { size: legendSize } }
+                            },
                             tooltip: { backgroundColor: 'rgba(15, 23, 42, 0.9)', titleColor: '#fff', bodyColor: '#cbd5e1' }
                         },
                         scales: {
-                            x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148, 163, 184, 0.12)' } },
-                            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148, 163, 184, 0.12)' }, suggestedMin: 60, suggestedMax: 100 }
+                            x: {
+                                ticks: { color: tickColor, font: { size: tickSize }, maxRotation: 0, autoSkip: true, maxTicksLimit: isMobile ? 4 : 6 },
+                                grid: { color: gridColor }
+                            },
+                            y: {
+                                ticks: { color: tickColor, font: { size: tickSize } },
+                                grid: { color: gridColor },
+                                suggestedMin: 60,
+                                suggestedMax: 100
+                            }
                         }
                     }
                 });

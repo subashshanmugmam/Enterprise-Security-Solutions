@@ -102,12 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const isOpen = !answer.classList.contains('hidden');
 
             // Close all other FAQs
-            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.faq-answer').forEach(a => {
+                a.classList.add('hidden');
+                a.classList.remove('animate-fade-in');
+            });
             document.querySelectorAll('.faq-question i').forEach(i => i.classList.remove('rotate-180'));
 
             // Toggle current
             if (!isOpen) {
                 answer.classList.remove('hidden');
+                answer.classList.add('animate-fade-in');
                 icon.classList.add('rotate-180');
             }
         });

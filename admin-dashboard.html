@@ -416,7 +416,7 @@
                         <i class="fa-solid fa-chart-line text-primary"></i>
                         Network Traffic Overview
                     </h3>
-                    <div class="h-80 w-full relative">
+                    <div class="dashboard-chart relative">
                         <canvas id="trafficChart"></canvas>
                     </div>
                 </div>
@@ -612,6 +612,12 @@
 
         // Chart.js with Premium Colors
         const ctx = document.getElementById('trafficChart').getContext('2d');
+        const isMobile = window.matchMedia('(max-width: 640px)').matches;
+        const gridColor = '#1e293b';
+        const tickColor = '#94a3b8';
+        const legendSize = isMobile ? 11 : 14;
+        const tickSize = isMobile ? 10 : 12;
+
         const trafficChart = new Chart(ctx, {
             type: 'line',
             data: {
@@ -627,8 +633,8 @@
                     pointBackgroundColor: '#0066FF',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
+                    pointRadius: isMobile ? 3 : 5,
+                    pointHoverRadius: isMobile ? 5 : 7
                 }, {
                     label: 'Outbound Traffic (GB)',
                     data: [8, 12, 25, 40, 35, 20, 10],
@@ -641,18 +647,20 @@
                     pointBackgroundColor: '#7C3AED',
                     pointBorderColor: '#fff',
                     pointBorderWidth: 2,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
+                    pointRadius: isMobile ? 3 : 5,
+                    pointHoverRadius: isMobile ? 5 : 7
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                animation: isMobile ? false : undefined,
                 plugins: {
                     legend: {
+                        position: isMobile ? 'bottom' : 'top',
                         labels: {
-                            color: '#94a3b8',
-                            font: { size: 14, weight: 'bold' }
+                            color: tickColor,
+                            font: { size: legendSize, weight: 'bold' }
                         }
                     },
                     tooltip: {
@@ -667,12 +675,18 @@
                 },
                 scales: {
                     y: {
-                        grid: { color: '#1e293b' },
-                        ticks: { color: '#94a3b8', font: { weight: 'bold' } }
+                        grid: { color: gridColor },
+                        ticks: { color: tickColor, font: { size: tickSize, weight: 'bold' } }
                     },
                     x: {
-                        grid: { color: '#1e293b' },
-                        ticks: { color: '#94a3b8', font: { weight: 'bold' } }
+                        grid: { color: gridColor },
+                        ticks: {
+                            color: tickColor,
+                            font: { size: tickSize, weight: 'bold' },
+                            maxRotation: 0,
+                            autoSkip: true,
+                            maxTicksLimit: isMobile ? 4 : 7
+                        }
                     }
                 }
             }
